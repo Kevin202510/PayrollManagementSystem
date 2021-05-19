@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -220,6 +221,58 @@ public class Employees extends javax.swing.JFrame {
         createImage(generateCode());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void addNewEmployee() throws SQLException{
+        String addEmployee = "INSERT INTO `employees`(`FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `DOB`, `POSITION_ID`, `DAYS_OF_WORK`) VALUES (?,?,?,?,?,?)";
+        PreparedStatement st = conn.prepareStatement(addEmployee);
+//        st.setString(1, .getText());
+//        st.setString(2, .getText());
+//        st.setString(3, .getText());
+//        st.setString(4, .getText());
+//        st.setInt(5, .getText());
+//        st.setInt(6, .getText());
+            int i = st.executeUpdate();
+            if (i > 0) {
+                  JOptionPane.showMessageDialog(this,"Successfully Added");
+                  showEmployee();
+            } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+    }
+    
+     public void updateEmployee() throws SQLException{
+        String updateEmployee = "UPDATE `employees` SET `FIRST_NAME`=?, `MIDDLE_NAME`=?, `LAST_NAME`=?, `DOB`=?, `POSITION_ID`=?, `DAYS_OF_WORK`=? WHERE ID = ?";
+        PreparedStatement st = conn.prepareStatement(updateEmployee);
+//        st.setString(1, .getText());
+//        st.setString(2, .getText());
+//        st.setString(3, .getText());
+//        st.setString(4, .getText());
+//        st.setInt(5, .getText());
+//        st.setInt(6, .getText());
+//        st.setInt(6, .getText());
+
+            int i = st.executeUpdate();
+            if (i > 0) {
+                  JOptionPane.showMessageDialog(this,"Successfully Updated");
+                  showEmployee();
+            } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+    }
+     
+     public void deleteEmployee() throws SQLException{
+        String deleteEmployee = "DELETE employees WHERE ID = ?";
+        PreparedStatement st = conn.prepareStatement(deleteEmployee);
+//        st.setInt(1, .getText());
+
+            int i = st.executeUpdate();
+            if (i > 0) {
+                  JOptionPane.showMessageDialog(this,"Successfully Updated");
+                  showEmployee();
+            } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+    }
+     
     /**
      * @param args the command line arguments
      */
