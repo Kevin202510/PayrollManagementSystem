@@ -3,7 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Midoriya%20Izuku/Desktop/PayrollManagementSystem/src/Payroll/Employees.java</file>
+=======
+            <file>file:/C:/Users/Maria%20Crystaline/Desktop/PayrollManagementSystem/src/Payroll/PositionAndRates.java</file>
+            <file>file:/C:/Users/Maria%20Crystaline/Desktop/PayrollManagementSystem/src/Payroll/Employees.java</file>
+            <file>file:/C:/Users/Maria%20Crystaline/Desktop/PayrollManagementSystem/src/Payroll/MainEmployeeDashboard.java</file>
+            <file>file:/C:/Users/Maria%20Crystaline/Desktop/PayrollManagementSystem/src/Payroll/Dashboard.java</file>
+            <file>file:/C:/Users/Maria%20Crystaline/Desktop/PayrollManagementSystem/src/Payroll/LogIn.java</file>
+>>>>>>> 4cb7ae35cca4ef7ad82b34f20f0272d150ab270b
         </group>
     </open-files>
 </project-private>
