@@ -40,60 +40,70 @@ public class LogIn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jPanel1 = new javax.swing.JPanel();
+        jbtn_login = new javax.swing.JButton();
+        jtxt_uname = new javax.swing.JTextField();
+        j_password = new javax.swing.JPasswordField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jbtn_login.setBackground(new java.awt.Color(255, 102, 0));
+        jbtn_login.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 18)); // NOI18N
+        jbtn_login.setForeground(new java.awt.Color(255, 255, 255));
+        jbtn_login.setText("Log In");
+        jbtn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtn_loginActionPerformed(evt);
             }
         });
+        jPanel1.add(jbtn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 170, 40));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jtxt_uname.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 18)); // NOI18N
+        jtxt_uname.setBorder(null);
+        jtxt_uname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jtxt_unameActionPerformed(evt);
             }
         });
+        jPanel1.add(jtxt_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 100, 230, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(89, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
+        j_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        j_password.setBorder(null);
+        jPanel1.add(j_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 220, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 10));
+
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
+        jLabel3.setText("PASSWORD :");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 90, -1));
+
+        jSeparator1.setPreferredSize(new java.awt.Dimension(50, 20));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 230, 10));
+
+        jLabel2.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
+        jLabel2.setText("USERNAME :");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_loginActionPerformed
         try {
-            String username = jTextField1.getText();
-            String password = String.valueOf(jPasswordField1.getPassword());
+            String username = jtxt_uname.getText();
+            String password = String.valueOf(j_password.getPassword());
             
             String LoginQuery = "SELECT * FROM employees where FIRST_NAME='"+username+"' AND DOB = '"+password+"' AND ID=1";
             Statement st = conn.createStatement();
@@ -110,11 +120,11 @@ public class LogIn extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtn_loginActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jtxt_unameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_unameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jtxt_unameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,8 +162,14 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPasswordField j_password;
+    private javax.swing.JButton jbtn_login;
+    private javax.swing.JTextField jtxt_uname;
     // End of variables declaration//GEN-END:variables
 }
