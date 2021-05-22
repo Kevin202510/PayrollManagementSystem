@@ -30,6 +30,7 @@ public class PositionAndRates extends javax.swing.JFrame {
      */
     public PositionAndRates() {
         initComponents();
+        showDeductions();
         showPositionAndRates();
     }
 
@@ -55,6 +56,29 @@ public class PositionAndRates extends javax.swing.JFrame {
             Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+   
+   public void showDeductions(){
+        try {
+            sqlConnection getDB = new sqlConnection();
+            Connection conn = getDB.DbconnectP();
+            
+            DefaultTableModel model = (DefaultTableModel)jtbl_deductions.getModel();
+            Object[] posTable = new Object[9];
+            String getAllPositions = "SELECT * FROM deductions";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(getAllPositions);
+            
+            while(rs.next()){
+//                JOptionPane.showMessageDialog(this, rs.getInt("ID"));
+                posTable[0] = rs.getInt("ID");
+                posTable[1] = rs.getString("DEDUCTION_DESCRIPTION");
+                posTable[2] = rs.getDouble("DEDUCTION_RATE");
+                model.addRow(posTable);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -65,7 +89,7 @@ public class PositionAndRates extends javax.swing.JFrame {
         jbtn_x = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtbl_deductions = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtblPos_Rate = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -110,9 +134,9 @@ public class PositionAndRates extends javax.swing.JFrame {
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
 
-        jTable1.setBackground(new java.awt.Color(204, 204, 204));
-        jTable1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtbl_deductions.setBackground(new java.awt.Color(204, 204, 204));
+        jtbl_deductions.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        jtbl_deductions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -120,8 +144,13 @@ public class PositionAndRates extends javax.swing.JFrame {
                 "ID", "Rates", "RATES"
             }
         ));
-        jTable1.setRowHeight(30);
-        jScrollPane1.setViewportView(jTable1);
+        jtbl_deductions.setRowHeight(30);
+        jtbl_deductions.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbl_deductionsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtbl_deductions);
 
         jtblPos_Rate.setBackground(new java.awt.Color(204, 204, 204));
         jtblPos_Rate.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
@@ -134,6 +163,11 @@ public class PositionAndRates extends javax.swing.JFrame {
             }
         ));
         jtblPos_Rate.setRowHeight(30);
+        jtblPos_Rate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblPos_RateMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtblPos_Rate);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -149,10 +183,20 @@ public class PositionAndRates extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-2-24.png"))); // NOI18N
         jButton1.setText("UPDATE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete-24.png"))); // NOI18N
         jButton2.setText("DELETE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-24.png"))); // NOI18N
@@ -179,14 +223,29 @@ public class PositionAndRates extends javax.swing.JFrame {
         jButton7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-24.png"))); // NOI18N
         jButton7.setText("ADD");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-2-24.png"))); // NOI18N
         jButton8.setText("UPDATE");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete-24.png"))); // NOI18N
         jButton9.setText("DELETE");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jtxtDeductdesc.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
@@ -335,9 +394,72 @@ public class PositionAndRates extends javax.swing.JFrame {
             Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            addNewDeduction();
+        } catch (SQLException ex) {
+            Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    int id;
     
- 
-public void addNewPosition() throws SQLException{
+    private void jtblPos_RateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblPos_RateMouseClicked
+        id = Integer.parseInt(jtblPos_Rate.getValueAt(jtblPos_Rate.getSelectedRow(),0).toString());
+        jtxtPosition.setText(jtblPos_Rate.getValueAt(jtblPos_Rate.getSelectedRow(),1).toString());
+        jtxt_Rates.setText(jtblPos_Rate.getValueAt(jtblPos_Rate.getSelectedRow(),2).toString());
+    }//GEN-LAST:event_jtblPos_RateMouseClicked
+
+    private void jtbl_deductionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbl_deductionsMouseClicked
+       id = Integer.parseInt(jtbl_deductions.getValueAt(jtbl_deductions.getSelectedRow(),0).toString());
+       jtxtDeductdesc.setText(jtbl_deductions.getValueAt(jtbl_deductions.getSelectedRow(),1).toString());
+       jtxtDeductionRates.setText(jtbl_deductions.getValueAt(jtbl_deductions.getSelectedRow(),2).toString());
+    }//GEN-LAST:event_jtbl_deductionsMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            deletePositions(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        try {
+            deleteDeductions(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            updatePositions(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        try {
+            updateDeductions(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+    
+    private void tanggalinAngLamanNgPosition(){
+        jtxtPosition.setText("");
+        jtxt_Rates.setText("");
+    }
+    
+    private void tanggalinAngLamanNgDeduction(){
+        jtxtDeductdesc.setText("");
+        jtxtDeductionRates.setText("");
+    }
+    
+    public void addNewPosition() throws SQLException{
         String addPosition = "INSERT INTO `positions`(`POS_DESCRIPTION`,`RATE_PRICE`) VALUES (?,?)";
         PreparedStatement st = conn.prepareStatement(addPosition);
             st.setString(1, jtxtPosition.getText());
@@ -345,7 +467,7 @@ public void addNewPosition() throws SQLException{
             int i = st.executeUpdate();
            if (i > 0) {
                 JOptionPane.showMessageDialog(this,"Successfully Added");
-                st.setString(1, jtxtPosition.getText());
+                tanggalinAngLamanNgPosition();
                 DefaultTableModel mod = (DefaultTableModel)jtblPos_Rate.getModel();
                 mod.setRowCount(0);
                 showPositionAndRates();
@@ -354,6 +476,99 @@ public void addNewPosition() throws SQLException{
                 JOptionPane.showMessageDialog(this,"Error");
             }
     }
+
+    public void addNewDeduction() throws SQLException{
+        String addPosition = "INSERT INTO `deductions`(`DEDUCTION_DESCRIPTION`,`DEDUCTION_RATE`) VALUES (?,?)";
+        PreparedStatement st = conn.prepareStatement(addPosition);
+            st.setString(1, jtxtDeductdesc.getText());
+            st.setString(2, jtxtDeductionRates.getText());
+            int i = st.executeUpdate();
+           if (i > 0) {
+                JOptionPane.showMessageDialog(this,"Successfully Added");
+                tanggalinAngLamanNgDeduction();
+                DefaultTableModel mod = (DefaultTableModel)jtbl_deductions.getModel();
+                mod.setRowCount(0);
+                showDeductions();
+                 
+          } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+    }
+    
+    public void updateDeductions(int ids) throws SQLException{
+        String updateEmployee = "UPDATE `deductions` SET `DEDUCTION_DESCRIPTION`=?, `DEDUCTION_RATE`=? WHERE ID = ?";
+        PreparedStatement st = conn.prepareStatement(updateEmployee);
+        st.setString(1, jtxtDeductdesc.getText());
+            st.setString(2, jtxtDeductionRates.getText());
+        st.setInt(3, ids);
+
+            int i = st.executeUpdate();
+            if (i > 0) {
+                  JOptionPane.showMessageDialog(this,"Successfully Update");
+                  tanggalinAngLamanNgDeduction();
+                  DefaultTableModel mod = (DefaultTableModel)jtblPos_Rate.getModel();
+                    mod.setRowCount(0);
+                 showPositionAndRates();
+            } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+    }
+    
+     public void deletePositions(int id) throws SQLException{
+        String deleteEmployee = "DELETE FROM positions WHERE ID = ?";
+        PreparedStatement st = conn.prepareStatement(deleteEmployee);
+        st.setInt(1,id);
+
+            int i = st.executeUpdate();
+            if (i > 0) {
+                  JOptionPane.showMessageDialog(this,"Successfully Deleted");
+                  tanggalinAngLamanNgPosition();
+                  DefaultTableModel mod = (DefaultTableModel)jtblPos_Rate.getModel();
+                    mod.setRowCount(0);
+                 showPositionAndRates();
+            } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+            
+     }
+     
+      public void updatePositions(int ids) throws SQLException{
+        String updateEmployee = "UPDATE `positions` SET `POS_DESCRIPTION`=?, `RATE_PRICE`=? WHERE ID = ?";
+        PreparedStatement st = conn.prepareStatement(updateEmployee);
+        st.setString(1, jtxtPosition.getText());
+        st.setDouble(2, Double.parseDouble(jtxt_Rates.getText()));
+        st.setInt(3, ids);
+
+            int i = st.executeUpdate();
+            if (i > 0) {
+                  JOptionPane.showMessageDialog(this,"Successfully Update");
+                  tanggalinAngLamanNgPosition();
+                  DefaultTableModel mod = (DefaultTableModel)jtblPos_Rate.getModel();
+                    mod.setRowCount(0);
+                 showPositionAndRates();
+            } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+    }
+     
+     public void deleteDeductions(int id) throws SQLException{
+        String deleteEmployee = "DELETE FROM deductions WHERE ID = ?";
+        PreparedStatement st = conn.prepareStatement(deleteEmployee);
+        st.setInt(1,id);
+
+            int i = st.executeUpdate();
+            if (i > 0) {
+                  JOptionPane.showMessageDialog(this,"Successfully Deleted");
+                  tanggalinAngLamanNgDeduction();
+                  DefaultTableModel mod = (DefaultTableModel)jtbl_deductions.getModel();
+                    mod.setRowCount(0);
+                 showDeductions();
+            } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+            
+     }
+
     
     /**
      * @param args the command line arguments
@@ -408,9 +623,9 @@ public void addNewPosition() throws SQLException{
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtn_x;
     private javax.swing.JTable jtblPos_Rate;
+    private javax.swing.JTable jtbl_deductions;
     private javax.swing.JTextField jtxtDeductdesc;
     private javax.swing.JTextField jtxtDeductionRates;
     private javax.swing.JTextField jtxtPosition;
