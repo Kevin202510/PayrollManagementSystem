@@ -48,7 +48,7 @@ public class Employees extends javax.swing.JFrame {
     private void checkUser(){
         if (id==1) {
             showEmployee();
-            jPanel2.setVisible(false);
+            
         }
     }
     
@@ -110,7 +110,6 @@ public class Employees extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -126,7 +125,6 @@ public class Employees extends javax.swing.JFrame {
         jtxtDoW = new javax.swing.JTextField();
         jtxtFname = new javax.swing.JTextField();
         jcmbPos = new javax.swing.JComboBox<>();
-        jdtDoB = new com.toedter.calendar.JDateChooser();
         jbtnAdd = new javax.swing.JButton();
         jbtnUpdate = new javax.swing.JButton();
         jbtnDelete = new javax.swing.JButton();
@@ -135,13 +133,10 @@ public class Employees extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jtxtLname = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jdtDoB = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -6, 1280, 810));
 
         jPanel3.setBackground(new java.awt.Color(248, 211, 162));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 10, true));
@@ -238,7 +233,6 @@ public class Employees extends javax.swing.JFrame {
         jcmbPos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jcmbPos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
         jPanel3.add(jcmbPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 580, 160, 30));
-        jPanel3.add(jdtDoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 520, 160, 30));
 
         jbtnAdd.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add-emp.png"))); // NOI18N
@@ -290,6 +284,7 @@ public class Employees extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel9.setText("LAST NAME");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, -1, -1));
+        jPanel3.add(jdtDoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 530, 160, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 810));
 
@@ -459,7 +454,6 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnAdd;
