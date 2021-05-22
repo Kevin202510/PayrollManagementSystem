@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.krysalis.barcode4j.impl.code128.Code128Bean;
@@ -47,15 +48,15 @@ public class Employees extends javax.swing.JFrame {
 		try {
 		Code128Bean code128 = new Code128Bean();
 		code128.setHeight(15f);
-		code128.setModuleWidth(0.3);
+		code128.setModuleWidth(0.5);
 		code128.setQuietZone(10);
 		code128.doQuietZone(true);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		BitmapCanvasProvider canvas = new BitmapCanvasProvider(baos, "image/x-png", 300, BufferedImage.TYPE_BYTE_BINARY, false, 0);
+		BitmapCanvasProvider canvas = new BitmapCanvasProvider(baos, "image/x-png", 100, BufferedImage.TYPE_BYTE_BINARY, false, 0);
 		code128.generateBarcode(canvas, myString);
 		canvas.finish();
 		//write to png file
-		FileOutputStream fos = new FileOutputStream("C:\\Users\\Midoriya Izuku\\Desktop\\PayrollManagementSystem\\src\\Barcodes\\"+jtxtbar.getText()+".png");
+		FileOutputStream fos = new FileOutputStream("src\\Barcodes\\"+ myString + ".png");
 		fos.write(baos.toByteArray());
 		fos.flush();
 		fos.close();
@@ -119,13 +120,12 @@ public class Employees extends javax.swing.JFrame {
         jbtnAdd = new javax.swing.JButton();
         jbtnUpdate = new javax.swing.JButton();
         jbtnDelete = new javax.swing.JButton();
-        jtxtbar = new javax.swing.JTextField();
-        jbtnGen = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jtxtLname = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jdtDoB = new com.toedter.calendar.JDateChooser();
         jbtn_x = new javax.swing.JButton();
+        empcode = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -183,7 +183,7 @@ public class Employees extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("BARCODE");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 720, -1, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 720, -1, -1));
 
         jlblAddress.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jlblAddress.setText("ADDRESS");
@@ -226,6 +226,11 @@ public class Employees extends javax.swing.JFrame {
         });
         jPanel3.add(jtxtDoW, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 640, 160, 30));
 
+        jtxtFname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtFnameFocusLost(evt);
+            }
+        });
         jtxtFname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtFnameActionPerformed(evt);
@@ -261,17 +266,6 @@ public class Employees extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jbtnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 700, 170, 40));
-        jPanel3.add(jtxtbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 710, 160, 30));
-
-        jbtnGen.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbtnGen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/generate.png"))); // NOI18N
-        jbtnGen.setText("GENERATE");
-        jbtnGen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnGenActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jbtnGen, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 700, 170, 40));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("MIDDLE NAME");
@@ -299,13 +293,13 @@ public class Employees extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, -1, -1));
+        jPanel3.add(empcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 710, 310, 80));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 810));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
     private String generateCode(String data){
         String code=data;
         Random objGenerator = new Random();
@@ -339,11 +333,6 @@ public class Employees extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtFnameActionPerformed
 
-    private void jbtnGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGenActionPerformed
-        // TODO add your handling code here:
-//        createImage(generateCode());
-    }//GEN-LAST:event_jbtnGenActionPerformed
-
     int idselected;
     
     private void jtblEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblEmpMouseClicked
@@ -367,6 +356,14 @@ public class Employees extends javax.swing.JFrame {
         new Dashboard().setVisible(true);
     }//GEN-LAST:event_jbtn_xActionPerformed
 
+    private void jtxtFnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtFnameFocusLost
+       String codes = generateCode(jtxtFname.getText());
+       createImage(codes);
+       String filePath = "src\\Barcodes\\"+ codes + ".png";
+       ImageIcon vin = new ImageIcon(filePath);
+       empcode.setIcon(vin);
+    }//GEN-LAST:event_jtxtFnameFocusLost
+
     public void addNewEmployee() throws SQLException{
         DateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");  
         String strDate = dateFormat.format(jdtDoB.getDate());
@@ -384,7 +381,6 @@ public class Employees extends javax.swing.JFrame {
             int i = st.executeUpdate();
            if (i > 0) {
                 JOptionPane.showMessageDialog(this,"Successfully Added");
-                createImage(generateCode(jtxtFname.getText()));
                 DefaultTableModel mod = (DefaultTableModel)jtblEmp.getModel();
                 mod.setRowCount(0);
                  showEmployee();
@@ -465,6 +461,7 @@ public class Employees extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel empcode;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -477,7 +474,6 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnAdd;
     private javax.swing.JButton jbtnDelete;
-    private javax.swing.JButton jbtnGen;
     private javax.swing.JButton jbtnUpdate;
     private javax.swing.JButton jbtn_x;
     private javax.swing.JComboBox<String> jcmbPos;
@@ -489,6 +485,5 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtFname;
     private javax.swing.JTextField jtxtLname;
     private javax.swing.JTextField jtxtMname;
-    private javax.swing.JTextField jtxtbar;
     // End of variables declaration//GEN-END:variables
 }
