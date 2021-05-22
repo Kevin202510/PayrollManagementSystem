@@ -28,7 +28,8 @@ public class LogIn extends javax.swing.JFrame {
           
     public LogIn() {
         initComponents();
-        new MainEmployeeDashboard().setVisible(true);
+        
+//        new MainEmployeeDashboard().setVisible(true);
     }
 
     /**
@@ -72,23 +73,23 @@ public class LogIn extends javax.swing.JFrame {
                 jtxt_unameActionPerformed(evt);
             }
         });
-        jPanel1.add(jtxt_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 100, 230, 20));
+        jPanel1.add(jtxt_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 100, 210, 20));
 
         j_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         j_password.setBorder(null);
-        jPanel1.add(j_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 220, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 10));
+        jPanel1.add(j_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 200, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 200, 10));
 
         jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         jLabel3.setText("PASSWORD :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 90, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 120, -1));
 
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 20));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 230, 10));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 200, 10));
 
         jLabel2.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         jLabel2.setText("USERNAME :");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 120, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1.jpg"))); // NOI18N
@@ -112,7 +113,7 @@ public class LogIn extends javax.swing.JFrame {
             if (rs.next()) {
                 JOptionPane.showMessageDialog(this,"Your Now Login");
                 this.dispose();
-                new Dashboard(1).setVisible(true);
+                new Dashboard().setVisible(true);
 //                new MainEmployeeDashboard().setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(this,"Username or Password was Incorrect");

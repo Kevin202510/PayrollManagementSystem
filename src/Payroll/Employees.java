@@ -37,19 +37,10 @@ public class Employees extends javax.swing.JFrame {
     sqlConnection getDB = new sqlConnection();
     Connection conn = getDB.DbconnectP();
     
-    static int id;
     
-    public Employees(int id) {
+    public Employees() {
         initComponents();
-        this.id=1;
-        checkUser();
-    }
-    
-    private void checkUser(){
-        if (id==1) {
-            showEmployee();
-            
-        }
+        showEmployee();
     }
     
    public void createImage(String myString)  {
@@ -80,7 +71,7 @@ public class Employees extends javax.swing.JFrame {
             
             DefaultTableModel model = (DefaultTableModel)jtblEmp.getModel();
             Object[] empTable = new Object[9];
-            String getAllEmp = "SELECT * FROM `employees` LEFT JOIN positions ON positions.ID=employees.POSITION_ID LEFT JOIN rates ON rates.ID=positions.RATE_ID where employees.ID>1";
+            String getAllEmp = "SELECT * FROM `employees` LEFT JOIN positions ON positions.ID=employees.POSITION_ID where employees.ID>1";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(getAllEmp);
             
@@ -134,6 +125,7 @@ public class Employees extends javax.swing.JFrame {
         jtxtLname = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jdtDoB = new com.toedter.calendar.JDateChooser();
+        jbtn_x = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -157,9 +149,17 @@ public class Employees extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "BARCODE", "FULL NAME", "ADDRESS", "DATA OF BIRTH", "POSITION_ID", "DAYS OF WORK"
+                "ID", "BARCODE", "FULL NAME", "ADDRESS", "DATA OF BIRTH", "POSITION", "RATE", "DAYS OF WORK"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false, true, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtblEmp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblEmpMouseClicked(evt);
@@ -171,12 +171,15 @@ public class Employees extends javax.swing.JFrame {
             jtblEmp.getColumnModel().getColumn(1).setPreferredWidth(100);
             jtblEmp.getColumnModel().getColumn(2).setPreferredWidth(100);
             jtblEmp.getColumnModel().getColumn(3).setPreferredWidth(100);
-            jtblEmp.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jtblEmp.getColumnModel().getColumn(4).setResizable(false);
+            jtblEmp.getColumnModel().getColumn(4).setPreferredWidth(30);
             jtblEmp.getColumnModel().getColumn(5).setPreferredWidth(10);
-            jtblEmp.getColumnModel().getColumn(6).setPreferredWidth(100);
+            jtblEmp.getColumnModel().getColumn(6).setResizable(false);
+            jtblEmp.getColumnModel().getColumn(6).setPreferredWidth(30);
+            jtblEmp.getColumnModel().getColumn(7).setPreferredWidth(100);
         }
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 1260, 420));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 1240, 420));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("BARCODE");
@@ -286,6 +289,17 @@ public class Employees extends javax.swing.JFrame {
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, -1, -1));
         jPanel3.add(jdtDoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 530, 160, -1));
 
+        jbtn_x.setBackground(new java.awt.Color(255, 102, 0));
+        jbtn_x.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 11)); // NOI18N
+        jbtn_x.setForeground(new java.awt.Color(255, 255, 255));
+        jbtn_x.setText("X");
+        jbtn_x.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_xActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, -1, -1));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 810));
 
         pack();
@@ -347,6 +361,11 @@ public class Employees extends javax.swing.JFrame {
     private void jtxtLnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtLnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtLnameActionPerformed
+
+    private void jbtn_xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_xActionPerformed
+        this.dispose();
+        new Dashboard().setVisible(true);
+    }//GEN-LAST:event_jbtn_xActionPerformed
 
     public void addNewEmployee() throws SQLException{
         DateFormat dateFormat = new SimpleDateFormat("MMM-dd-yyyy");  
@@ -440,7 +459,7 @@ public class Employees extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Employees(id).setVisible(true);
+                new Employees().setVisible(true);
             }
         });
     }
@@ -460,6 +479,7 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JButton jbtnGen;
     private javax.swing.JButton jbtnUpdate;
+    private javax.swing.JButton jbtn_x;
     private javax.swing.JComboBox<String> jcmbPos;
     private com.toedter.calendar.JDateChooser jdtDoB;
     private javax.swing.JLabel jlblAddress;

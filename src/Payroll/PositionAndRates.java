@@ -323,7 +323,8 @@ public class PositionAndRates extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_xActionPerformed
-        // TODO add your handling code here:
+       this.dispose();
+       new Dashboard().setVisible(true);
     }//GEN-LAST:event_jbtn_xActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
