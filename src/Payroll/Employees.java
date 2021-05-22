@@ -368,7 +368,7 @@ public class Employees extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtn_xActionPerformed
 
     public void addNewEmployee() throws SQLException{
-        DateFormat dateFormat = new SimpleDateFormat("MMM-dd-yyyy");  
+        DateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");  
         String strDate = dateFormat.format(jdtDoB.getDate());
         
         String addEmployee = "INSERT INTO `employees`(`EMP_BARCODE`,`FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`,`ADDRESS`,`DOB`, `POSITION_ID`, `DAYS_OF_WORK`) VALUES (?,?,?,?,?,?,?,?)";
