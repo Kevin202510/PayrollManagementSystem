@@ -106,26 +106,27 @@ public class Employees extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblEmp = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jlblAddress = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jtxtMname = new javax.swing.JTextField();
-        jtxtAddress = new javax.swing.JTextField();
-        jtxtDoW = new javax.swing.JTextField();
-        jtxtFname = new javax.swing.JTextField();
-        jcmbPos = new javax.swing.JComboBox<>();
         jbtnAdd = new javax.swing.JButton();
         jbtnUpdate = new javax.swing.JButton();
         jbtnDelete = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jtxtLname = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jdtDoB = new com.toedter.calendar.JDateChooser();
         jbtn_x = new javax.swing.JButton();
         empcode = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jdtDoB = new com.toedter.calendar.JDateChooser();
+        jcmbPos = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jtxtDoW = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jtxtFname = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jtxtMname = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jtxtLname = new javax.swing.JTextField();
+        jlblAddress = new javax.swing.JLabel();
+        jtxtAddress = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -179,68 +180,7 @@ public class Employees extends javax.swing.JFrame {
             jtblEmp.getColumnModel().getColumn(7).setPreferredWidth(100);
         }
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 1240, 420));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel2.setText("BARCODE");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 720, -1, -1));
-
-        jlblAddress.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jlblAddress.setText("ADDRESS");
-        jPanel3.add(jlblAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setText("DATE OF BIRTH");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("POSITION");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 590, 80, 10));
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setText("DAYS OF WORK");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 650, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel7.setText("FIRST NAME");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, -1));
-
-        jtxtMname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtMnameActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jtxtMname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 580, 160, 30));
-
-        jtxtAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtAddressActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jtxtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 710, 160, 30));
-
-        jtxtDoW.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtDoWActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jtxtDoW, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 640, 160, 30));
-
-        jtxtFname.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtxtFnameFocusLost(evt);
-            }
-        });
-        jtxtFname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtFnameActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jtxtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 160, 30));
-
-        jcmbPos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jcmbPos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
-        jPanel3.add(jcmbPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 580, 160, 30));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1240, 420));
 
         jbtnAdd.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add-emp.png"))); // NOI18N
@@ -250,12 +190,12 @@ public class Employees extends javax.swing.JFrame {
                 jbtnAddActionPerformed(evt);
             }
         });
-        jPanel3.add(jbtnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 580, 170, 40));
+        jPanel3.add(jbtnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 580, 170, 40));
 
         jbtnUpdate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbtnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit-emp.png"))); // NOI18N
         jbtnUpdate.setText("   UPDATE");
-        jPanel3.add(jbtnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 580, 170, 40));
+        jPanel3.add(jbtnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 580, 170, 40));
 
         jbtnDelete.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbtnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/remove-emp.png"))); // NOI18N
@@ -265,23 +205,7 @@ public class Employees extends javax.swing.JFrame {
                 jbtnDeleteActionPerformed(evt);
             }
         });
-        jPanel3.add(jbtnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 700, 170, 40));
-
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel8.setText("MIDDLE NAME");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, -1, -1));
-
-        jtxtLname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtLnameActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jtxtLname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 640, 160, 30));
-
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel9.setText("LAST NAME");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, -1, -1));
-        jPanel3.add(jdtDoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 530, 160, -1));
+        jPanel3.add(jbtnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 650, 170, 40));
 
         jbtn_x.setBackground(new java.awt.Color(255, 102, 0));
         jbtn_x.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 11)); // NOI18N
@@ -294,6 +218,89 @@ public class Employees extends javax.swing.JFrame {
         });
         jPanel3.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, -1, -1));
         jPanel3.add(empcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 710, 310, 80));
+
+        jPanel1.setBackground(new java.awt.Color(248, 211, 162));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setText("DATE OF BIRTH");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
+        jPanel1.add(jdtDoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 160, -1));
+
+        jcmbPos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jcmbPos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        jPanel1.add(jcmbPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 160, 30));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setText("POSITION");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 80, 10));
+
+        jtxtDoW.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtDoWActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtxtDoW, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 160, 30));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel6.setText("DAYS OF WORK");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel2.setText("BARCODE");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel7.setText("FIRST NAME");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jtxtFname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtFnameFocusLost(evt);
+            }
+        });
+        jtxtFname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtFnameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtxtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 160, 30));
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel8.setText("MIDDLE NAME");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+
+        jtxtMname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtMnameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtxtMname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 160, 30));
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel9.setText("LAST NAME");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        jtxtLname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtLnameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtxtLname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 160, 30));
+
+        jlblAddress.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jlblAddress.setText("ADDRESS");
+        jPanel1.add(jlblAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+
+        jtxtAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtAddressActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtxtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 160, 30));
+
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 1200, 250));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 810));
 
@@ -470,6 +477,7 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnAdd;
