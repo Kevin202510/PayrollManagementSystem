@@ -150,7 +150,7 @@ public class Employees extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "BARCODE", "FULL NAME", "ADDRESS", "DATA OF BIRTH", "POSITION", "RATE", "DAYS OF WORK"
+                "ID", "BARCODE", "FULL NAME", "ADDRESS", "DATE OF BIRTH", "POSITION", "RATE", "DAYS OF WORK"
             }
         ) {
             boolean[] canEdit = new boolean [] {

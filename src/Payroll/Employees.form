@@ -93,7 +93,7 @@
                     <Column editable="true" title="BARCODE" type="java.lang.Object"/>
                     <Column editable="true" title="FULL NAME" type="java.lang.Object"/>
                     <Column editable="true" title="ADDRESS" type="java.lang.Object"/>
-                    <Column editable="false" title="DATA OF BIRTH" type="java.lang.Object"/>
+                    <Column editable="false" title="DATE OF BIRTH" type="java.lang.Object"/>
                     <Column editable="true" title="POSITION" type="java.lang.Object"/>
                     <Column editable="false" title="RATE" type="java.lang.Object"/>
                     <Column editable="true" title="DAYS OF WORK" type="java.lang.Object"/>
