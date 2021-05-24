@@ -479,6 +479,7 @@ public class Employees extends javax.swing.JFrame {
             int i = st.executeUpdate();
            if (i > 0) {
                 JOptionPane.showMessageDialog(this,"Successfully Added");
+                deleteForm();
                 DefaultTableModel model = (DefaultTableModel)jtblEmp.getModel();
                 model.setRowCount(0);
                  showEmployee();
@@ -506,6 +507,7 @@ public class Employees extends javax.swing.JFrame {
             int i = st.executeUpdate();
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"Successfully Updated");
+                  deleteForm();
                    DefaultTableModel model = (DefaultTableModel)jtblEmp.getModel();
                     model.setRowCount(0);
                   showEmployee();
@@ -521,7 +523,8 @@ public class Employees extends javax.swing.JFrame {
 
             int i = st.executeUpdate();
             if (i > 0) {
-                  JOptionPane.showMessageDialog(this,"Successfully Updated");
+                  JOptionPane.showMessageDialog(this,"DELETED");
+                  deleteForm();
                   DefaultTableModel mod = (DefaultTableModel)jtblEmp.getModel();
                 mod.setRowCount(0);
                  showEmployee();
@@ -554,6 +557,16 @@ public class Employees extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
         }
+     }
+     
+     public void deleteForm(){
+         jtxtFname.setText("");
+         jtxtMname.setText("");
+         jtxtLname.setText("");
+         jtxtAddress.setText("");
+         jdtDoB.setDate(null);
+         jcmbPos.setSelectedIndex(0);
+         
      }
      
     /**
