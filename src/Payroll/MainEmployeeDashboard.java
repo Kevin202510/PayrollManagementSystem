@@ -258,11 +258,20 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
             if (rs.getString("DATEIN").equals(getDateNow())) {
                 JOptionPane.showMessageDialog(this,"Your Out");
             }else if(!rs.getString("DATEIN").equals(getDateNow())) {
-                addLogs(id);
+                if (hour>=18) {
+                    JOptionPane.showMessageDialog(this,"Store Closssssssse");
+                    jTextField1.setText(""); 
+                }else{
+                    addLogs(id);
+                }
             }
             }else{
-                JOptionPane.showMessageDialog(this,"Store Close");
-                 addLogs(id);
+                if (hour>=18) {
+                    JOptionPane.showMessageDialog(this,"Store Close");
+                    jTextField1.setText(""); 
+                }else{
+                    addLogs(id);
+                }
             }
             
         } catch (SQLException ex) {
