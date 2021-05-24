@@ -127,6 +127,7 @@ public class Employees extends javax.swing.JFrame {
         jtxtLname = new javax.swing.JTextField();
         jlblAddress = new javax.swing.JLabel();
         jtxtAddress = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -302,6 +303,14 @@ public class Employees extends javax.swing.JFrame {
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 1200, 250));
 
+        jButton1.setText("PAYROLL");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 23, 100, 40));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 810));
 
         pack();
@@ -372,6 +381,25 @@ public class Employees extends javax.swing.JFrame {
        ImageIcon vin = new ImageIcon(filePath);
        empcode.setIcon(vin);
     }//GEN-LAST:event_jtxtFnameFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            sqlConnection getDB = new sqlConnection();
+            Connection conn = getDB.DbconnectP();
+            
+            String getAllEmp = "SELECT * FROM `employees` LEFT JOIN positions ON positions.ID=employees.POSITION_ID where employees.ID>1";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(getAllEmp);
+            
+            while(rs.next()){
+                String fullname = rs.getString("FIRST_NAME") + " " + rs.getString("MIDDLE_NAME") + " " + rs.getString("LAST_NAME");
+                double totalsalary = rs.getInt("RATE_PRICE") * rs.getDouble("DAYS_OF_WORK");
+                JOptionPane.showMessageDialog(this,"fullname : " +fullname + "\n" + "Rate : " + rs.getInt("RATE_PRICE") + "\n" + "Days Of Work : " + rs.getDouble("DAYS_OF_WORK") + "\n" + "SALARY : " + totalsalary);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void addNewEmployee() throws SQLException{
         DateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");  
@@ -471,6 +499,7 @@ public class Employees extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel empcode;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

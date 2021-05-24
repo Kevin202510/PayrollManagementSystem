@@ -158,10 +158,8 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtn_employeeActionPerformed
 
     private void jbtn_xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_xActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        new MainEmployeeDashboard().setVisible(false);
         new LogIn().setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_jbtn_xActionPerformed
 
