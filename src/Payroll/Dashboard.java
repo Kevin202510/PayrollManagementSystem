@@ -35,10 +35,11 @@ public class Dashboard extends javax.swing.JFrame {
         jbtn_employee = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jbtn_x = new javax.swing.JButton();
+        jbtn_payrolls = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(527, 236));
+        setPreferredSize(new java.awt.Dimension(537, 300));
 
         jPanel1.setBackground(new java.awt.Color(248, 210, 160));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 5, true));
@@ -88,6 +89,19 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        jbtn_payrolls.setBackground(new java.awt.Color(255, 102, 0));
+        jbtn_payrolls.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 20)); // NOI18N
+        jbtn_payrolls.setForeground(new java.awt.Color(255, 255, 255));
+        jbtn_payrolls.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dollar-3-32.png"))); // NOI18N
+        jbtn_payrolls.setText("PAYROLLS");
+        jbtn_payrolls.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbtn_payrolls.setIconTextGap(30);
+        jbtn_payrolls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_payrollsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -110,6 +124,10 @@ public class Dashboard extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtn_x)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addComponent(jbtn_payrolls, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +142,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbtn_employee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtn_posrate, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jbtn_payrolls, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -147,6 +167,12 @@ public class Dashboard extends javax.swing.JFrame {
         new PositionAndRates().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jbtn_posrateActionPerformed
+
+    private void jbtn_payrollsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_payrollsActionPerformed
+        // TODO add your handling code here:
+        new Payrolls().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jbtn_payrollsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,6 +214,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtn_employee;
+    private javax.swing.JButton jbtn_payrolls;
     private javax.swing.JButton jbtn_posrate;
     private javax.swing.JButton jbtn_x;
     // End of variables declaration//GEN-END:variables

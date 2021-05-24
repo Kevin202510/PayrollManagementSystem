@@ -142,7 +142,7 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
         jPanel1.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, -1, 20));
 
         date.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 140, 40));
+        jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 140, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
