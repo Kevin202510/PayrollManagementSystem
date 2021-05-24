@@ -47,12 +47,12 @@ public class Employees extends javax.swing.JFrame {
    public void createImage(String myString)  {
 		try {
 		Code128Bean code128 = new Code128Bean();
-		code128.setHeight(15f);
+		code128.setHeight(50f);
 		code128.setModuleWidth(0.5);
 		code128.setQuietZone(10);
 		code128.doQuietZone(true);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		BitmapCanvasProvider canvas = new BitmapCanvasProvider(baos, "image/x-png", 100, BufferedImage.TYPE_BYTE_BINARY, false, 0);
+		BitmapCanvasProvider canvas = new BitmapCanvasProvider(baos, "image/x-png", 300, BufferedImage.TYPE_BYTE_BINARY, false, 0);
 		code128.generateBarcode(canvas, myString);
 		canvas.finish();
 		//write to png file
@@ -308,7 +308,7 @@ public class Employees extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private String generateCode(String data){
-        String code=data;
+        String code="";
         Random objGenerator = new Random();
         for (int iCount = 0; iCount< 10; iCount++){
           int randomNumber = objGenerator.nextInt(10);
@@ -363,8 +363,10 @@ public class Employees extends javax.swing.JFrame {
         new Dashboard().setVisible(true);
     }//GEN-LAST:event_jbtn_xActionPerformed
 
+    String codes;
+    
     private void jtxtFnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtFnameFocusLost
-       String codes = generateCode(jtxtFname.getText());
+       codes = generateCode(jtxtFname.getText());
        createImage(codes);
        String filePath = "src\\Barcodes\\"+ codes + ".png";
        ImageIcon vin = new ImageIcon(filePath);
@@ -377,7 +379,7 @@ public class Employees extends javax.swing.JFrame {
         
         String addEmployee = "INSERT INTO `employees`(`EMP_BARCODE`,`FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`,`ADDRESS`,`DOB`, `POSITION_ID`, `DAYS_OF_WORK`) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement st = conn.prepareStatement(addEmployee);
-            st.setString(1, generateCode(jtxtFname.getText()));
+            st.setString(1, codes);
             st.setString(2, jtxtFname.getText());
             st.setString(3, jtxtMname.getText());
             st.setString(4, jtxtLname.getText());

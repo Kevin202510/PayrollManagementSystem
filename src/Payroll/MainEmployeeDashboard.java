@@ -5,6 +5,20 @@
  */
 package Payroll;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Midoriya Izuku
@@ -14,9 +28,13 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
     /**
      * Creates new form MainEmployeeDashboard
      */
+ 
+    
     public MainEmployeeDashboard() {
         initComponents();
         jTextField1.requestFocusInWindow();
+        showAllLogs();
+        new VideoFeeder().start();
     }
 
     /**
@@ -36,10 +54,11 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtbl_emplogs = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jbtn_x = new javax.swing.JButton();
+        date = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +83,12 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
 
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -81,17 +106,21 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 310, 50));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtbl_emplogs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "FULLNAME", "TIME IN", "TIME OUT"
+                "ID", "EMPLOYEE CODE", "FULLNAME", "TIME IN", "TIME OUT"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtbl_emplogs);
+        if (jtbl_emplogs.getColumnModel().getColumnCount() > 0) {
+            jtbl_emplogs.getColumnModel().getColumn(0).setResizable(false);
+            jtbl_emplogs.getColumnModel().getColumn(0).setPreferredWidth(20);
+        }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 180, 1100, 560));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 180, 1100, 510));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setText("DATE:");
@@ -111,6 +140,9 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, -1, 20));
+
+        date.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 140, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,9 +164,191 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
         new Dashboard().setVisible(true);
     }//GEN-LAST:event_jbtn_xActionPerformed
 
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        if (evt.getKeyCode()==10) {
+            checkEmployee(jTextField1.getText());
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
+    double dow;
+    public void checkEmployee(String empcode){
+        sqlConnection getDB = new sqlConnection();
+        Connection conn = getDB.DbconnectP();
+        
+        try {
+            DefaultTableModel model = (DefaultTableModel)jtbl_emplogs.getModel();
+            Object[] empTable = new Object[9];
+            String getAllEmps = "SELECT * FROM `employees` where ID>1 AND EMP_BARCODE = '"+empcode+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(getAllEmps);
+            
+            if(rs.next()){
+               int id = rs.getInt("ID"); 
+               dow=rs.getDouble("DAYS_OF_WORK");
+               checkLogs(id);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainEmployeeDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void showAllLogs(){
+        sqlConnection getDB = new sqlConnection();
+        Connection conn = getDB.DbconnectP();
+        
+        try {
+            DefaultTableModel model = (DefaultTableModel)jtbl_emplogs.getModel();
+            Object[] empTable = new Object[9];
+            String getAllEmps = "SELECT * FROM `emplogs` LEFT JOIN employees ON employees.ID=emplogs.EMP_ID WHERE DATEIN = '"+getDateNow()+"' AND status = 1";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(getAllEmps);
+            
+            while(rs.next()){
+              String fullname = rs.getString("FIRST_NAME") + " " + rs.getString("MIDDLE_NAME") + " " + rs.getString("LAST_NAME");
+              empTable[0] = rs.getInt("EMPLOG_ID");
+              empTable[1] = rs.getString("EMP_BARCODE");
+              empTable[2] = fullname;
+              empTable[3] = rs.getString("TIMEIN");
+              empTable[4] = rs.getString("TIMEOUT");
+              model.addRow(empTable);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainEmployeeDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void checkLogs(int id){
+        sqlConnection getDB = new sqlConnection();
+        Connection conn = getDB.DbconnectP();
+        
+        try {
+            String getAllEmps = "SELECT * FROM `emplogs` WHERE EMP_ID ='"+id+"' AND status=1";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(getAllEmps);
+            
+            if(rs.next()){
+                if (hour>=18) {
+                    JOptionPane.showMessageDialog(this,"OUT KANA");
+                    int idd = rs.getInt("EMPLOG_ID");
+                    updateEmployeeLogs(idd,id);
+                    jTextField1.setText(""); 
+                }else{
+                    JOptionPane.showMessageDialog(this,"Your Already TimeIn");
+                    jTextField1.setText(""); 
+                }
+            }else{
+                checkLog(id);
+//                    JOptionPane.showMessageDialog(this,"Hindi Pa");
+//                    addLogs(id);
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainEmployeeDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void checkLog(int id){
+       sqlConnection getDB = new sqlConnection();
+        Connection conn = getDB.DbconnectP();
+        
+        try {
+            String getAllEmps = "SELECT * FROM `emplogs` WHERE EMP_ID ='"+id+"' AND status=0";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(getAllEmps);
+            if (rs.next()) {
+            
+            if (rs.getString("DATEIN").equals(getDateNow())) {
+                JOptionPane.showMessageDialog(this,"Your Out");
+            }else if(!rs.getString("DATEIN").equals(getDateNow())) {
+                addLogs(id);
+            }
+            }else{
+                JOptionPane.showMessageDialog(this,"Store Close");
+                 addLogs(id);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MainEmployeeDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String getTimeNow(){
+         Date date = Calendar.getInstance().getTime();  
+        SimpleDateFormat emptimeinformat = new SimpleDateFormat("hh:mm:00 aa"); 
+        String strTime = emptimeinformat.format(date);
+        return strTime;
+     }
+    
+    public String getDateNow(){
+         Date date = Calendar.getInstance().getTime();  
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+        String strDate = dateFormat.format(date);
+        return strDate;
+     }
+    
+    public void addLogs(int id) throws SQLException{
+        sqlConnection getDB = new sqlConnection();
+        Connection conn = getDB.DbconnectP();
+        String addPosition = "INSERT INTO `emplogs`(`EMP_ID`,`DATEIN`,`TIMEIN`) VALUES (?,?,?)";
+        PreparedStatement st = conn.prepareStatement(addPosition);
+            st.setInt(1, id);
+            st.setString(2, getDateNow());
+            st.setString(3, getTimeNow());
+//            st.setString(4, getTimeNow());
+            int i = st.executeUpdate();
+           if (i > 0) {
+                JOptionPane.showMessageDialog(this,"Successfully Added");
+                DefaultTableModel model = (DefaultTableModel)jtbl_emplogs.getModel();
+                Object[] empTable = new Object[9];
+                model.setRowCount(0);
+                showAllLogs();
+                jTextField1.setText(""); 
+                 
+          } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+    }
+    
+    public void updateEmployeeLogs(int id,int idds){
+        try {
+            sqlConnection getDB = new sqlConnection();
+            Connection conn = getDB.DbconnectP();
+            String addPosition = "UPDATE emplogs SET `TIMEOUT` = ?,status=0 where EMPLOG_ID=?";
+            PreparedStatement st = conn.prepareStatement(addPosition);
+            st.setString(1,getTimeNow());
+            st.setInt(2,id);
+            int i = st.executeUpdate();
+            if (i > 0) {
+                String addPositions = "UPDATE employees SET `DAYS_OF_WORK` = ? where ID=?";
+                PreparedStatement sts = conn.prepareStatement(addPositions);
+                sts.setDouble(1,dow+1);
+                sts.setInt(2,idds);
+                sts.executeUpdate();
+                JOptionPane.showMessageDialog(this,"Successfully Updated");
+                DefaultTableModel model = (DefaultTableModel)jtbl_emplogs.getModel();
+                Object[] empTable = new Object[9];
+                model.setRowCount(0);
+                showAllLogs();
+                jTextField1.setText("");
+                
+            } else {
+                JOptionPane.showMessageDialog(this,"Error");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainEmployeeDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+//    String fullname = rs.getString("FIRST_NAME") + " " + rs.getString("MIDDLE_NAME") + " " + rs.getString("LAST_NAME");
+//                empTable[0] = rs.getString("EMP_BARCODE");
+//                empTable[1] = fullname;
+//                empTable[2] = rs.getString("ADDRESS");
+//                empTable[3] = rs.getString("DOB");
+//               
+//                model.addRow(empTable);
     /**
      * @param args the command line arguments
      */
+          
+          
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -168,6 +382,7 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel date;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -177,8 +392,32 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbtn_x;
+    private javax.swing.JTable jtbl_emplogs;
     // End of variables declaration//GEN-END:variables
+    
+    String time;
+    int hour;
+    
+    class VideoFeeder extends Thread {
+    
+          public void run(){
+                  
+                  String ss = "00";
+                  
+                  while(true){
+//                      try {
+                          Calendar cal = Calendar.getInstance();
+                          SimpleDateFormat kevs = new SimpleDateFormat("hh:mm:ss aa");
+                          Date dat = cal.getTime();
+                          String timess = kevs.format(dat);
+                          hour = cal.get(Calendar.HOUR_OF_DAY);
+                          time=timess;
+                          date.setText(time);
+          
+          }
+          }
+    }
+
 }
