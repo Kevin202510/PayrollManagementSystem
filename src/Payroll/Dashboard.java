@@ -93,7 +93,7 @@ public class Dashboard extends javax.swing.JFrame {
         jbtn_payrolls.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 20)); // NOI18N
         jbtn_payrolls.setForeground(new java.awt.Color(255, 255, 255));
         jbtn_payrolls.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dollar-3-32.png"))); // NOI18N
-        jbtn_payrolls.setText("PAYROLLS");
+        jbtn_payrolls.setText("Payrolls");
         jbtn_payrolls.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jbtn_payrolls.setIconTextGap(30);
         jbtn_payrolls.addActionListener(new java.awt.event.ActionListener() {

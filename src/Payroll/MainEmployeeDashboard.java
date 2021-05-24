@@ -34,6 +34,7 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
         initComponents();
         jTextField1.requestFocusInWindow();
         showAllLogs();
+        jlbl_date.setText(getDateNow());
         new VideoFeeder().start();
     }
 
@@ -58,7 +59,8 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jbtn_x = new javax.swing.JButton();
-        date = new javax.swing.JLabel();
+        jlbl_date = new javax.swing.JLabel();
+        jlbl_time = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,8 +143,11 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
         });
         jPanel1.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, -1, 20));
 
-        date.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 140, 20));
+        jlbl_date.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel1.add(jlbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 140, 20));
+
+        jlbl_time.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel1.add(jlbl_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 140, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -280,16 +285,16 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
     }
     
     public String getTimeNow(){
-         Date date = Calendar.getInstance().getTime();  
+         Date jlbl_time = Calendar.getInstance().getTime();  
         SimpleDateFormat emptimeinformat = new SimpleDateFormat("hh:mm:00 aa"); 
-        String strTime = emptimeinformat.format(date);
+        String strTime = emptimeinformat.format(jlbl_time);
         return strTime;
      }
     
     public String getDateNow(){
-         Date date = Calendar.getInstance().getTime();  
+         Date jlbl_date = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-        String strDate = dateFormat.format(date);
+        String strDate = dateFormat.format(jlbl_date);
         return strDate;
      }
     
@@ -391,7 +396,6 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel date;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -403,6 +407,8 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbtn_x;
+    private javax.swing.JLabel jlbl_date;
+    private javax.swing.JLabel jlbl_time;
     private javax.swing.JTable jtbl_emplogs;
     // End of variables declaration//GEN-END:variables
     
@@ -423,7 +429,7 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
                           String timess = kevs.format(dat);
                           hour = cal.get(Calendar.HOUR_OF_DAY);
                           time=timess;
-                          date.setText(time);
+                          jlbl_time.setText(time);
           
           }
           }
