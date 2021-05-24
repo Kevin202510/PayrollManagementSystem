@@ -20,6 +20,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.krysalis.barcode4j.impl.code128.Code128Bean;
@@ -42,17 +43,19 @@ public class Employees extends javax.swing.JFrame {
     public Employees() {
         initComponents();
         showEmployee();
+        showPositions(jcmbPos);
+//        String kev = jcmbPos.getSelectedItem();
     }
     
    public void createImage(String myString)  {
 		try {
 		Code128Bean code128 = new Code128Bean();
-		code128.setHeight(50f);
+		code128.setHeight(10f);
 		code128.setModuleWidth(0.5);
-		code128.setQuietZone(10);
+		code128.setQuietZone(5);
 		code128.doQuietZone(true);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		BitmapCanvasProvider canvas = new BitmapCanvasProvider(baos, "image/x-png", 300, BufferedImage.TYPE_BYTE_BINARY, false, 0);
+		BitmapCanvasProvider canvas = new BitmapCanvasProvider(baos, "image/x-png", 150, BufferedImage.TYPE_BYTE_BINARY, false, 0);
 		code128.generateBarcode(canvas, myString);
 		canvas.finish();
 		//write to png file
@@ -223,7 +226,7 @@ public class Employees extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, -1, -1));
-        jPanel3.add(empcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 710, 310, 80));
+        jPanel3.add(empcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 690, 320, 70));
 
         jPanel1.setBackground(new java.awt.Color(248, 211, 162));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
@@ -235,7 +238,11 @@ public class Employees extends javax.swing.JFrame {
         jPanel1.add(jdtDoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 160, -1));
 
         jcmbPos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jcmbPos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        jcmbPos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmbPosActionPerformed(evt);
+            }
+        });
         jPanel1.add(jcmbPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 160, 30));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -413,12 +420,48 @@ public class Employees extends javax.swing.JFrame {
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
         try {
             // TODO add your handling code here:
-            updateEmployee();
+            updateEmployee(idselected);
         } catch (SQLException ex) {
             Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtnUpdateActionPerformed
 
+    String posi;
+            
+    private void jcmbPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbPosActionPerformed
+        posi = jcmbPos.getSelectedItem().toString();
+    }//GEN-LAST:event_jcmbPosActionPerformed
+
+    public void showPositions(JComboBox positions){
+        String tanong = "Select * from positions";
+        try{
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(tanong);
+        while(rs.next()){
+         String vin = rs.getString("POS_DESCRIPTION");
+         positions.addItem(vin);
+        }
+        }
+        catch (SQLException ex) {
+        }
+    }
+    
+    public int getSelectedPositions(String pos){
+        int posid=0;
+        String tanong = "Select * from positions WHERE POS_DESCRIPTION = '"+pos+"'";
+        try{
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(tanong);
+        while(rs.next()){
+            posid=rs.getInt("ID");
+            return posid;
+        }
+        }
+        catch (SQLException ex) {
+        }
+        return posid;
+    }
+    
     public void addNewEmployee() throws SQLException{
         DateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");  
         String strDate = dateFormat.format(jdtDoB.getDate());
@@ -431,7 +474,7 @@ public class Employees extends javax.swing.JFrame {
             st.setString(4, jtxtLname.getText());
             st.setString(5, jtxtAddress.getText());
             st.setString(6, strDate);
-            st.setInt(7, 2);
+            st.setInt(7,  getSelectedPositions(posi));
             st.setInt(8, Integer.parseInt(jtxtDoW.getText()));
             int i = st.executeUpdate();
            if (i > 0) {
@@ -444,20 +487,19 @@ public class Employees extends javax.swing.JFrame {
             }
     }
     
-     public void updateEmployee() throws SQLException{
-        String UpdateEmployee = "UPDATE `employees` SET `FIRST_NAME`=?, `MIDDLE_NAME`=?, `LAST_NAME`=?, `DOBs`=? `DOB`=?, `POSITION_ID`=?, `DAYS_OF_WORK`=? WHERE ID = ?";
+     public void updateEmployee(int ids) throws SQLException{
+        String UpdateEmployee = "UPDATE `employees` SET `FIRST_NAME`=?, `MIDDLE_NAME`=?, `LAST_NAME`=?, `ADDRESS`=? ,`DOB`=?, `POSITION_ID`=? WHERE ID = ?";
         PreparedStatement st = conn.prepareStatement(UpdateEmployee);
         
             DateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");  
            String strDate = dateFormat.format(jdtDoB.getDate());
-           
-        st.setString(1, codes);
-        st.setString(2, jtxtFname.getText());
-        st.setString(3, jtxtMname.getText());
-        st.setString(4, jtxtLname.getText());
-        st.setString(5, jtxtAddress.getText());
-        st.setString(6, strDate);
-        st.setInt(7, 2);
+            st.setString(1, jtxtFname.getText());
+            st.setString(2, jtxtMname.getText());
+            st.setString(3, jtxtLname.getText());
+            st.setString(4, jtxtAddress.getText());
+            st.setString(5, strDate);
+            st.setInt(6, getSelectedPositions(posi));
+            st.setInt(7, ids);
         
 
 
@@ -505,7 +547,7 @@ public class Employees extends javax.swing.JFrame {
                 jtxtLname.setText(rs.getString("LAST_NAME"));
                 jtxtAddress.setText(rs.getString("ADDRESS"));
                 jdtDoB.setDate(rs.getDate("DOB"));
-                jcmbPos.setSelectedIndex(rs.getInt("POSITION_ID"));
+                jcmbPos.setSelectedItem(rs.getString("POS_DESCRIPTION"));
                 
                 
             }
