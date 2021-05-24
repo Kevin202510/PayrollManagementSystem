@@ -5,6 +5,15 @@
  */
 package Payroll;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author acer
@@ -16,6 +25,8 @@ public class Payrolls extends javax.swing.JFrame {
      */
     public Payrolls() {
         initComponents();
+        jtxtsearchEmpToPayOut.requestFocusInWindow();
+        jpnl_payslip.setVisible(false);
     }
 
     /**
@@ -31,12 +42,22 @@ public class Payrolls extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtbl_empPayroll = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jbtn_x = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jtxtsearchEmpToPayOut = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jpnl_payslip = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jlbl_fullname = new javax.swing.JLabel();
+        jlbl_positions = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jlbl_totalSalary = new javax.swing.JLabel();
+        jlbl_DOW = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +73,7 @@ public class Payrolls extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 83, 1262, 10));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtbl_empPayroll.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -60,7 +81,7 @@ public class Payrolls extends javax.swing.JFrame {
                 "EMP_BARCODE", "FULLNAME", "DAYS OF WORK", "SALARY"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtbl_empPayroll);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 153, 1215, 596));
 
@@ -80,14 +101,42 @@ public class Payrolls extends javax.swing.JFrame {
         });
         jPanel1.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1219, 0, -1, -1));
 
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(892, 104, 360, 40));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/search-3-24.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 4, -1, 40));
+        jtxtsearchEmpToPayOut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxtsearchEmpToPayOutKeyPressed(evt);
+            }
+        });
+        jPanel3.add(jtxtsearchEmpToPayOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 300, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 90, 370, 50));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-3-24.png"))); // NOI18N
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, 40));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, 340, 40));
+
+        jpnl_payslip.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("FULLNAME");
+        jpnl_payslip.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 67, 60, 29));
+
+        jLabel3.setText("POSITION");
+        jpnl_payslip.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 102, 60, 29));
+
+        jLabel5.setText("DAYS OF WORK");
+        jpnl_payslip.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 137, 90, 29));
+
+        jLabel6.setText("TOTAL SALARY");
+        jpnl_payslip.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 177, 80, 29));
+        jpnl_payslip.add(jlbl_fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 67, 260, 29));
+        jpnl_payslip.add(jlbl_positions, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 102, 252, 29));
+        jpnl_payslip.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 112, 260, 29));
+        jpnl_payslip.add(jlbl_totalSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 190, 29));
+        jpnl_payslip.add(jlbl_DOW, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 90, 29));
+
+        jPanel1.add(jpnl_payslip, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 350, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,6 +157,13 @@ public class Payrolls extends javax.swing.JFrame {
         this.dispose();
         new Dashboard().setVisible(true);
     }//GEN-LAST:event_jbtn_xActionPerformed
+
+    private void jtxtsearchEmpToPayOutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtsearchEmpToPayOutKeyPressed
+        if (evt.getKeyCode()==10) {
+            new PaySlip(jtxtsearchEmpToPayOut.getText());
+            JOptionPane.showMessageDialog(this,new PaySlip(jtxtsearchEmpToPayOut.getText()),"PaySlip",JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_jtxtsearchEmpToPayOutKeyPressed
 
     /**
      * @param args the command line arguments
@@ -148,13 +204,23 @@ public class Payrolls extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbtn_x;
+    private javax.swing.JLabel jlbl_DOW;
+    private javax.swing.JLabel jlbl_fullname;
+    private javax.swing.JLabel jlbl_positions;
+    private javax.swing.JLabel jlbl_totalSalary;
+    private javax.swing.JPanel jpnl_payslip;
+    private javax.swing.JTable jtbl_empPayroll;
+    private javax.swing.JTextField jtxtsearchEmpToPayOut;
     // End of variables declaration//GEN-END:variables
 }

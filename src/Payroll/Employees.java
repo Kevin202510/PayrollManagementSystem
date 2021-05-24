@@ -340,6 +340,12 @@ public class Employees extends javax.swing.JFrame {
         return code;
     }
     private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
+       codes = generateCode(jtxtFname.getText());
+       createImage(codes);
+       String filePath = "src\\Barcodes\\"+ codes + ".png";
+       ImageIcon vin = new ImageIcon(filePath);
+       empcode.setIcon(vin);
+       
         try {
             addNewEmployee();
         } catch (SQLException ex) {
@@ -391,11 +397,7 @@ public class Employees extends javax.swing.JFrame {
     String codes;
     
     private void jtxtFnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtFnameFocusLost
-       codes = generateCode(jtxtFname.getText());
-       createImage(codes);
-       String filePath = "src\\Barcodes\\"+ codes + ".png";
-       ImageIcon vin = new ImageIcon(filePath);
-       empcode.setIcon(vin);
+      
     }//GEN-LAST:event_jtxtFnameFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -566,6 +568,7 @@ public class Employees extends javax.swing.JFrame {
          jtxtAddress.setText("");
          jdtDoB.setDate(null);
          jcmbPos.setSelectedIndex(0);
+         empcode.setIcon(null);
          
      }
      
