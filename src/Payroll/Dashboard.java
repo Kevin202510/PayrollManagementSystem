@@ -119,7 +119,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 20, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtn_x)))
@@ -154,24 +154,24 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_employeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_employeeActionPerformed
+        this.dispose();
         new Employees().setVisible(true);
     }//GEN-LAST:event_jbtn_employeeActionPerformed
 
     private void jbtn_xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_xActionPerformed
-        new LogIn().setVisible(true);
         this.dispose();
-        
+        new LogIn().setVisible(true);        
     }//GEN-LAST:event_jbtn_xActionPerformed
 
     private void jbtn_posrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_posrateActionPerformed
-        new PositionAndRates().setVisible(true);
         this.dispose();
+        new PositionAndRates().setVisible(true);
     }//GEN-LAST:event_jbtn_posrateActionPerformed
 
     private void jbtn_payrollsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_payrollsActionPerformed
         // TODO add your handling code here:
-        new Payrolls().setVisible(true);
         this.dispose();
+        new Payrolls().setVisible(true);
     }//GEN-LAST:event_jbtn_payrollsActionPerformed
 
     /**

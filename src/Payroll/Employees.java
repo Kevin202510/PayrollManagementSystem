@@ -553,7 +553,7 @@ public class Employees extends javax.swing.JFrame {
                 jtxtAddress.setText(rs.getString("ADDRESS"));
                 jdtDoB.setDate(rs.getDate("DOB"));
                 jcmbPos.setSelectedItem(rs.getString("POS_DESCRIPTION"));
-                
+                jtxtDoW.setText(String.valueOf(rs.getDouble("DAYS_OF_WORK")));
                 
             }
         } catch (SQLException ex) {

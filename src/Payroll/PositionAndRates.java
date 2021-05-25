@@ -501,7 +501,7 @@ public class PositionAndRates extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"Successfully Update");
                   tanggalinAngLamanNgDeduction();
-                  DefaultTableModel mod = (DefaultTableModel)jtblPos_Rate.getModel();
+                  DefaultTableModel mod = (DefaultTableModel)jtbl_deductions.getModel();
                     mod.setRowCount(0);
                  showPositionAndRates();
             } else {

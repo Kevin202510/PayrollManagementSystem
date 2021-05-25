@@ -28,6 +28,8 @@ public class PaySlip extends javax.swing.JPanel {
         searchEmployee();
     }
     
+    double totalsalary;
+    
     public void searchEmployee(){
        try {
             sqlConnection getDB = new sqlConnection();
@@ -39,12 +41,44 @@ public class PaySlip extends javax.swing.JPanel {
             
             while(rs.next()){
                 String fullname = rs.getString("FIRST_NAME") + " " + rs.getString("MIDDLE_NAME") + " " + rs.getString("LAST_NAME");
-                double totalsalary = rs.getInt("RATE_PRICE") * rs.getDouble("DAYS_OF_WORK");
+                getDeductions();
+                totalsalary = (rs.getInt("RATE_PRICE") * rs.getDouble("DAYS_OF_WORK")) - deductot;
                 jlbl_fullname.setText(fullname);
                 jlbl_positions.setText(rs.getString("POS_DESCRIPTION"));
                 jlbl_DOW.setText(String.valueOf(rs.getDouble("DAYS_OF_WORK")));
                 jlbl_totalSalary.setText(String.valueOf(totalsalary));
 //                JOptionPane.showMessageDialog(this,"fullname : " +fullname + "\n" + "Rate : " + rs.getInt("RATE_PRICE") + "\n" + "Days Of Work : " + rs.getDouble("DAYS_OF_WORK") + "\n" + "SALARY : " + totalsalary);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    double deductot;
+    
+    public void getDeductions(){
+        try {
+            sqlConnection getDB = new sqlConnection();
+            Connection conn = getDB.DbconnectP();
+            
+            String getAllEmp = "SELECT * FROM deductions";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(getAllEmp);
+            
+            while(rs.next()){
+                if (rs.getInt("ID")==1) {
+                    jlbl_sssdeduc.setText(String.valueOf(rs.getInt("DEDUCTION_RATE")));
+                }else if (rs.getInt("ID")==2) {
+                    jlbl_phildeduc.setText(String.valueOf(rs.getInt("DEDUCTION_RATE")));
+                }else if (rs.getInt("ID")==3) {
+                    jlbl_pagibigdeduc.setText(String.valueOf(rs.getInt("DEDUCTION_RATE")));
+                }
+                String getAllEmps = "SELECT SUM(DEDUCTION_RATE) FROM `deductions`";
+                Statement sts = conn.createStatement();
+                ResultSet rss = sts.executeQuery(getAllEmps);
+                while(rss.next()){
+                    deductot = Double.parseDouble(rss.getString("SUM(DEDUCTION_RATE)"));
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,6 +110,13 @@ public class PaySlip extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jlbl_pagibigdeduc = new javax.swing.JLabel();
+        jlbl_phildeduc = new javax.swing.JLabel();
+        jlbl_sssdeduc = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -94,11 +135,11 @@ public class PaySlip extends javax.swing.JPanel {
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 130, 29));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setText("TOTAL SALARY");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 120, 29));
+        jLabel6.setText("PAG-IBIG");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 80, 29));
         add(jlbl_fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 250, 29));
         add(jlbl_positions, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 240, 29));
-        add(jlbl_totalSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 180, 29));
+        add(jlbl_totalSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 180, 29));
         add(jlbl_DOW, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 80, 29));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -116,7 +157,7 @@ public class PaySlip extends javax.swing.JPanel {
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 380, -1));
 
         jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 380, -1));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 380, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dollar-2-24.png"))); // NOI18N
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 0, 30, 40));
@@ -126,17 +167,40 @@ public class PaySlip extends javax.swing.JPanel {
 
         jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
         add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 400, 30));
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel8.setText("TOTAL SALARY");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 120, 29));
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel9.setText("DEDUCTIONS   : ");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 120, 29));
+
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel10.setText("PHILHEALTH");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 100, 29));
+
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel11.setText("SSS");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 30, 29));
+        add(jlbl_pagibigdeduc, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 180, 30));
+        add(jlbl_phildeduc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 180, 30));
+        add(jlbl_sssdeduc, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 180, 30));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -144,7 +208,10 @@ public class PaySlip extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel jlbl_DOW;
     private javax.swing.JLabel jlbl_fullname;
+    private javax.swing.JLabel jlbl_pagibigdeduc;
+    private javax.swing.JLabel jlbl_phildeduc;
     private javax.swing.JLabel jlbl_positions;
+    private javax.swing.JLabel jlbl_sssdeduc;
     private javax.swing.JLabel jlbl_totalSalary;
     // End of variables declaration//GEN-END:variables
 }
