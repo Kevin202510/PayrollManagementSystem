@@ -32,6 +32,8 @@ public class PositionAndRates extends javax.swing.JFrame {
         initComponents();
         showDeductions();
         showPositionAndRates();
+        disableDed_Button();
+        disablePos_Button();
     }
 
    public void showPositionAndRates(){
@@ -96,18 +98,19 @@ public class PositionAndRates extends javax.swing.JFrame {
         jtxtPosition = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jtxt_Rates = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbtnPos_Update = new javax.swing.JButton();
+        jbtnPos_Delete = new javax.swing.JButton();
+        jbtnPos_Add = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        jbtnDeduc_Add = new javax.swing.JButton();
+        jbtnDeduc_Update = new javax.swing.JButton();
+        jbtnDeduc_Delete = new javax.swing.JButton();
         jtxtDeductdesc = new javax.swing.JTextField();
         jtxtDeductionRates = new javax.swing.JTextField();
+        jbtnPos_Cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 650));
@@ -143,7 +146,15 @@ public class PositionAndRates extends javax.swing.JFrame {
             new String [] {
                 "ID", "Description", "Rate"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtbl_deductions.setRowHeight(30);
         jtbl_deductions.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -161,7 +172,15 @@ public class PositionAndRates extends javax.swing.JFrame {
             new String [] {
                 "ID", "POSITION", "RATES"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtblPos_Rate.setRowHeight(30);
         jtblPos_Rate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -180,30 +199,31 @@ public class PositionAndRates extends javax.swing.JFrame {
 
         jtxt_Rates.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-2-24.png"))); // NOI18N
-        jButton1.setText("UPDATE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtnPos_Update.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbtnPos_Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-2-24.png"))); // NOI18N
+        jbtnPos_Update.setText("UPDATE");
+        jbtnPos_Update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtnPos_UpdateActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete-24.png"))); // NOI18N
-        jButton2.setText("DELETE");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtnPos_Delete.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbtnPos_Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete-24.png"))); // NOI18N
+        jbtnPos_Delete.setText("DELETE");
+        jbtnPos_Delete.setPreferredSize(new java.awt.Dimension(120, 33));
+        jbtnPos_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtnPos_DeleteActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-24.png"))); // NOI18N
-        jButton3.setText("ADD");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbtnPos_Add.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbtnPos_Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-24.png"))); // NOI18N
+        jbtnPos_Add.setText("ADD");
+        jbtnPos_Add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbtnPos_AddActionPerformed(evt);
             }
         });
 
@@ -220,36 +240,46 @@ public class PositionAndRates extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("DEDUCTION RATES");
 
-        jButton7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-24.png"))); // NOI18N
-        jButton7.setText("ADD");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jbtnDeduc_Add.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbtnDeduc_Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-24.png"))); // NOI18N
+        jbtnDeduc_Add.setText("ADD");
+        jbtnDeduc_Add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jbtnDeduc_AddActionPerformed(evt);
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-2-24.png"))); // NOI18N
-        jButton8.setText("UPDATE");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jbtnDeduc_Update.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbtnDeduc_Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-2-24.png"))); // NOI18N
+        jbtnDeduc_Update.setText("UPDATE");
+        jbtnDeduc_Update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jbtnDeduc_UpdateActionPerformed(evt);
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete-24.png"))); // NOI18N
-        jButton9.setText("DELETE");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jbtnDeduc_Delete.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbtnDeduc_Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete-24.png"))); // NOI18N
+        jbtnDeduc_Delete.setText("DELETE");
+        jbtnDeduc_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jbtnDeduc_DeleteActionPerformed(evt);
             }
         });
 
         jtxtDeductdesc.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         jtxtDeductionRates.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+
+        jbtnPos_Cancel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbtnPos_Cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete-24.png"))); // NOI18N
+        jbtnPos_Cancel.setText("CANCEL");
+        jbtnPos_Cancel.setPreferredSize(new java.awt.Dimension(120, 33));
+        jbtnPos_Cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPos_CancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -264,11 +294,11 @@ public class PositionAndRates extends javax.swing.JFrame {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnDeduc_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnDeduc_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(88, 88, 88)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbtnDeduc_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(jtxtDeductdesc, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +318,11 @@ public class PositionAndRates extends javax.swing.JFrame {
                         .addGap(108, 108, 108)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
-                        .addComponent(jtxt_Rates, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtxt_Rates, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbtnPos_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jbtnPos_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 201, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -298,15 +332,13 @@ public class PositionAndRates extends javax.swing.JFrame {
                 .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(205, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(267, 267, 267))
+                        .addComponent(jbtnPos_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jbtnPos_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(532, 532, 532))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(229, 229, 229)
@@ -336,9 +368,10 @@ public class PositionAndRates extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jbtnPos_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtnPos_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtnPos_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtnPos_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -353,9 +386,9 @@ public class PositionAndRates extends javax.swing.JFrame {
                     .addComponent(jtxtDeductionRates, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnDeduc_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnDeduc_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnDeduc_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(143, 143, 143))
@@ -381,22 +414,22 @@ public class PositionAndRates extends javax.swing.JFrame {
        new Dashboard().setVisible(true);
     }//GEN-LAST:event_jbtn_xActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbtnPos_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPos_AddActionPerformed
         try {
             // TODO add your handling code here:
             addNewPosition();
         } catch (SQLException ex) {
             Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbtnPos_AddActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jbtnDeduc_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeduc_AddActionPerformed
         try {
             addNewDeduction();
         } catch (SQLException ex) {
             Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jbtnDeduc_AddActionPerformed
 
     int id;
     
@@ -404,45 +437,52 @@ public class PositionAndRates extends javax.swing.JFrame {
         id = Integer.parseInt(jtblPos_Rate.getValueAt(jtblPos_Rate.getSelectedRow(),0).toString());
         jtxtPosition.setText(jtblPos_Rate.getValueAt(jtblPos_Rate.getSelectedRow(),1).toString());
         jtxt_Rates.setText(jtblPos_Rate.getValueAt(jtblPos_Rate.getSelectedRow(),2).toString());
+        disablePosition_Button();
+        
     }//GEN-LAST:event_jtblPos_RateMouseClicked
 
     private void jtbl_deductionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbl_deductionsMouseClicked
        id = Integer.parseInt(jtbl_deductions.getValueAt(jtbl_deductions.getSelectedRow(),0).toString());
        jtxtDeductdesc.setText(jtbl_deductions.getValueAt(jtbl_deductions.getSelectedRow(),1).toString());
        jtxtDeductionRates.setText(jtbl_deductions.getValueAt(jtbl_deductions.getSelectedRow(),2).toString());
+       disabdleDeduc_Button();
     }//GEN-LAST:event_jtbl_deductionsMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbtnPos_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPos_DeleteActionPerformed
         try {
             deletePositions(id);
         } catch (SQLException ex) {
             Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbtnPos_DeleteActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jbtnDeduc_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeduc_DeleteActionPerformed
         try {
             deleteDeductions(id);
         } catch (SQLException ex) {
             Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_jbtnDeduc_DeleteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtnPos_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPos_UpdateActionPerformed
         try {
             updatePositions(id);
         } catch (SQLException ex) {
             Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtnPos_UpdateActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jbtnDeduc_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeduc_UpdateActionPerformed
         try {
             updateDeductions(id);
         } catch (SQLException ex) {
             Logger.getLogger(PositionAndRates.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jbtnDeduc_UpdateActionPerformed
+
+    private void jbtnPos_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPos_CancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnPos_CancelActionPerformed
     
     private void tanggalinAngLamanNgPosition(){
         jtxtPosition.setText("");
@@ -563,6 +603,30 @@ public class PositionAndRates extends javax.swing.JFrame {
             }
             
      }
+     
+      public void disabdleDeduc_Button(){
+         jbtnDeduc_Add.setEnabled(false);
+         jbtnDeduc_Update.setEnabled(true);
+         jbtnDeduc_Delete.setEnabled(true);
+     }
+     
+     public void disableDed_Button(){
+         jbtnDeduc_Add.setEnabled(true);
+         jbtnDeduc_Update.setEnabled(false);
+         jbtnDeduc_Delete.setEnabled(false);
+     }
+     
+     public void disablePosition_Button(){
+         jbtnPos_Add.setEnabled(false);
+         jbtnPos_Update.setEnabled(true);
+         jbtnPos_Delete.setEnabled(true);
+     }
+     
+     public void disablePos_Button(){
+         jbtnPos_Add.setEnabled(true);
+         jbtnPos_Update.setEnabled(false);
+         jbtnPos_Delete.setEnabled(false);
+     }
 
     
     /**
@@ -601,12 +665,6 @@ public class PositionAndRates extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -618,6 +676,13 @@ public class PositionAndRates extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton jbtnDeduc_Add;
+    private javax.swing.JButton jbtnDeduc_Delete;
+    private javax.swing.JButton jbtnDeduc_Update;
+    private javax.swing.JButton jbtnPos_Add;
+    private javax.swing.JButton jbtnPos_Cancel;
+    private javax.swing.JButton jbtnPos_Delete;
+    private javax.swing.JButton jbtnPos_Update;
     private javax.swing.JButton jbtn_x;
     private javax.swing.JTable jtblPos_Rate;
     private javax.swing.JTable jtbl_deductions;

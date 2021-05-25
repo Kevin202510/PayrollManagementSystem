@@ -162,7 +162,7 @@ public class PaySlip extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dollar-2-24.png"))); // NOI18N
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 0, 30, 40));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dollar-2-24.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Silen\\Downloads\\peso.png")); // NOI18N
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 30, 40));
 
         jSeparator5.setBackground(new java.awt.Color(0, 0, 0));

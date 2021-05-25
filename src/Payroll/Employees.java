@@ -44,6 +44,7 @@ public class Employees extends javax.swing.JFrame {
         initComponents();
         showEmployee();
         showPositions(jcmbPos);
+       disableButton();
 //        String kev = jcmbPos.getSelectedItem();
     }
     
@@ -374,6 +375,7 @@ public class Employees extends javax.swing.JFrame {
     private void jtblEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblEmpMouseClicked
         idselected = Integer.parseInt(jtblEmp.getValueAt(jtblEmp.getSelectedRow(),0).toString());
        getSelectedEmp(idselected);
+       disableAddButton();
         
     }//GEN-LAST:event_jtblEmpMouseClicked
 
@@ -513,6 +515,7 @@ public class Employees extends javax.swing.JFrame {
                    DefaultTableModel model = (DefaultTableModel)jtblEmp.getModel();
                     model.setRowCount(0);
                   showEmployee();
+                  disableButton();
             } else {
                 JOptionPane.showMessageDialog(this,"Error");
             }
@@ -530,6 +533,7 @@ public class Employees extends javax.swing.JFrame {
                   DefaultTableModel mod = (DefaultTableModel)jtblEmp.getModel();
                 mod.setRowCount(0);
                  showEmployee();
+                 disableButton();
             } else {
                 JOptionPane.showMessageDialog(this,"Error");
             }
@@ -570,6 +574,18 @@ public class Employees extends javax.swing.JFrame {
          jcmbPos.setSelectedIndex(0);
          empcode.setIcon(null);
          
+     }
+     
+     public void disableAddButton(){
+         jbtnAdd.setEnabled(false);
+         jbtnUpdate.setEnabled(true);
+         jbtnDelete.setEnabled(true);
+     }
+     
+     public void disableButton(){
+         jbtnAdd.setEnabled(true);
+         jbtnUpdate.setEnabled(false);
+         jbtnDelete.setEnabled(false);
      }
      
     /**

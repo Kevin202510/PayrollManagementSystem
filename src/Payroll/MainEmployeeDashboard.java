@@ -115,14 +115,22 @@ public class MainEmployeeDashboard extends javax.swing.JFrame {
             new String [] {
                 "ID", "EMPLOYEE CODE", "FULLNAME", "TIME IN", "TIME OUT"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jtbl_emplogs);
         if (jtbl_emplogs.getColumnModel().getColumnCount() > 0) {
             jtbl_emplogs.getColumnModel().getColumn(0).setResizable(false);
             jtbl_emplogs.getColumnModel().getColumn(0).setPreferredWidth(20);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 180, 1100, 510));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 180, 1100, 490));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setText("DATE:");
