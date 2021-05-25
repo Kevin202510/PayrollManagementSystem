@@ -5,12 +5,6 @@
  */
 package Payroll;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +16,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -99,11 +92,6 @@ public class Payrolls extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/printer-4-24.png"))); // NOI18N
         jButton1.setText("PRINT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1102, 755, 128, 48));
 
         jbtn_x.setBackground(new java.awt.Color(255, 102, 0));
@@ -153,68 +141,13 @@ public class Payrolls extends javax.swing.JFrame {
         new Dashboard().setVisible(true);
     }//GEN-LAST:event_jbtn_xActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
     private void jtxtsearchEmpToPayOutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtsearchEmpToPayOutKeyPressed
         if (evt.getKeyCode()==10) {
             new PaySlip(jtxtsearchEmpToPayOut.getText());
-            printPaySlip(new PaySlip(jtxtsearchEmpToPayOut.getText()));  
+            JOptionPane.showMessageDialog(this,new PaySlip(jtxtsearchEmpToPayOut.getText()),"PaySlip",JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_jtxtsearchEmpToPayOutKeyPressed
 
-    public void printPaySlip(JPanel panel){
-        JOptionPane.showMessageDialog(this,panel,"PaySlip",JOptionPane.PLAIN_MESSAGE);
-        // Create PrinterJob Here
-        PrinterJob printerJob = PrinterJob.getPrinterJob();
-        // Set Printer Job Name
-        printerJob.setJobName("Print Record");
-        // Set Printable
-        printerJob.setPrintable(new Printable() {
-            @Override
-            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-                // Check If No Printable Content
-                if(pageIndex > 0){
-                    return Printable.NO_SUCH_PAGE;
-                }
-                
-                // Make 2D Graphics to map content
-                Graphics2D graphics2D = (Graphics2D)graphics;
-                // Set Graphics Translations
-                // A Little Correction here Multiplication was not working so I replaced with addition
-//                graphics2D.translate(pageFormat.getImageableX()+10, pageFormat.getImageableY()+10);
-                // This is a page scale. Default should be 0.3 I am using 0.5
-                graphics2D.scale(0.5, 0.5);
-                
-                // Now paint panel as graphics2D
-                panel.paint(graphics2D);
-                
-                // return if page exists
-                return Printable.PAGE_EXISTS;
-            }
-        });
-        // Store printerDialog as boolean
-//        boolean returningResult = printerJob.printDialog();
-        // check if dilog is showing
-//        
-        boolean returningResult;
-            
-            do{
-                returningResult = printerJob.printDialog();
-                if (!returningResult) {
-                    JOptionPane.showMessageDialog(null,"You Cannot Cancel Printing PaySlip");
-                }
-            }while(returningResult==false);
-            // Use try catch exeption for failure
-            if(returningResult){
-            try{
-                printerJob.print();
-            }catch (PrinterException printerException){
-                JOptionPane.showMessageDialog(null, "Print Error: " + printerException.getMessage());
-            }
-        }
-}
-    
     public void showEmployee(){
         try {
             sqlConnection getDB = new sqlConnection();
