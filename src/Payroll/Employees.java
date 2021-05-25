@@ -44,7 +44,20 @@ public class Employees extends javax.swing.JFrame {
         initComponents();
         showEmployee();
         showPositions(jcmbPos);
+        tagomoto();
 //        String kev = jcmbPos.getSelectedItem();
+    }
+    
+    private void tagomoto(){
+        jbtnUpdate.setEnabled(false);
+        jbtnDelete.setEnabled(false);
+       jbtnAdd.setEnabled(true);
+    }
+    
+    private void labasmoto(){
+        jbtnUpdate.setEnabled(true);
+        jbtnDelete.setEnabled(true);
+       jbtnAdd.setEnabled(false);
     }
     
    public void createImage(String myString)  {
@@ -130,7 +143,6 @@ public class Employees extends javax.swing.JFrame {
         jtxtLname = new javax.swing.JTextField();
         jlblAddress = new javax.swing.JLabel();
         jtxtAddress = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -315,16 +327,6 @@ public class Employees extends javax.swing.JFrame {
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 1200, 250));
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dollar-3-32.png"))); // NOI18N
-        jButton1.setText("PAYROLL");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 160, 40));
-
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 810));
 
         pack();
@@ -374,7 +376,7 @@ public class Employees extends javax.swing.JFrame {
     private void jtblEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblEmpMouseClicked
         idselected = Integer.parseInt(jtblEmp.getValueAt(jtblEmp.getSelectedRow(),0).toString());
        getSelectedEmp(idselected);
-        
+       labasmoto();
     }//GEN-LAST:event_jtblEmpMouseClicked
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
@@ -399,25 +401,6 @@ public class Employees extends javax.swing.JFrame {
     private void jtxtFnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtFnameFocusLost
       
     }//GEN-LAST:event_jtxtFnameFocusLost
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            sqlConnection getDB = new sqlConnection();
-            Connection conn = getDB.DbconnectP();
-            
-            String getAllEmp = "SELECT * FROM `employees` LEFT JOIN positions ON positions.ID=employees.POSITION_ID where employees.ID>1";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(getAllEmp);
-            
-            while(rs.next()){
-                String fullname = rs.getString("FIRST_NAME") + " " + rs.getString("MIDDLE_NAME") + " " + rs.getString("LAST_NAME");
-                double totalsalary = rs.getInt("RATE_PRICE") * rs.getDouble("DAYS_OF_WORK");
-                JOptionPane.showMessageDialog(this,"fullname : " +fullname + "\n" + "Rate : " + rs.getInt("RATE_PRICE") + "\n" + "Days Of Work : " + rs.getDouble("DAYS_OF_WORK") + "\n" + "SALARY : " + totalsalary);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
         try {
@@ -477,11 +460,12 @@ public class Employees extends javax.swing.JFrame {
             st.setString(5, jtxtAddress.getText());
             st.setString(6, strDate);
             st.setInt(7,  getSelectedPositions(posi));
-            st.setInt(8, Integer.parseInt(jtxtDoW.getText()));
+            st.setDouble(8, Double.parseDouble(jtxtDoW.getText()));
             int i = st.executeUpdate();
            if (i > 0) {
                 JOptionPane.showMessageDialog(this,"Successfully Added");
                 deleteForm();
+                tagomoto();
                 DefaultTableModel model = (DefaultTableModel)jtblEmp.getModel();
                 model.setRowCount(0);
                  showEmployee();
@@ -510,6 +494,7 @@ public class Employees extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"Successfully Updated");
                   deleteForm();
+                  tagomoto();
                    DefaultTableModel model = (DefaultTableModel)jtblEmp.getModel();
                     model.setRowCount(0);
                   showEmployee();
@@ -527,6 +512,7 @@ public class Employees extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"DELETED");
                   deleteForm();
+                  tagomoto();
                   DefaultTableModel mod = (DefaultTableModel)jtblEmp.getModel();
                 mod.setRowCount(0);
                  showEmployee();
@@ -569,7 +555,7 @@ public class Employees extends javax.swing.JFrame {
          jdtDoB.setDate(null);
          jcmbPos.setSelectedIndex(0);
          empcode.setIcon(null);
-         
+         jtxtDoW.setText("");
      }
      
     /**
@@ -609,7 +595,6 @@ public class Employees extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel empcode;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
