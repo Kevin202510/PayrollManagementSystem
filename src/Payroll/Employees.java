@@ -5,6 +5,7 @@
  */
 package Payroll;
 
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -266,6 +267,11 @@ public class Employees extends javax.swing.JFrame {
                 jtxtDoWActionPerformed(evt);
             }
         });
+        jtxtDoW.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtDoWKeyTyped(evt);
+            }
+        });
         jPanel1.add(jtxtDoW, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 160, 30));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -290,6 +296,11 @@ public class Employees extends javax.swing.JFrame {
                 jtxtFnameActionPerformed(evt);
             }
         });
+        jtxtFname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtFnameKeyTyped(evt);
+            }
+        });
         jPanel1.add(jtxtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 160, 30));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -299,6 +310,11 @@ public class Employees extends javax.swing.JFrame {
         jtxtMname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtMnameActionPerformed(evt);
+            }
+        });
+        jtxtMname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtMnameKeyTyped(evt);
             }
         });
         jPanel1.add(jtxtMname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 160, 30));
@@ -312,6 +328,11 @@ public class Employees extends javax.swing.JFrame {
                 jtxtLnameActionPerformed(evt);
             }
         });
+        jtxtLname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtLnameKeyTyped(evt);
+            }
+        });
         jPanel1.add(jtxtLname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 160, 30));
 
         jlblAddress.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -321,6 +342,11 @@ public class Employees extends javax.swing.JFrame {
         jtxtAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtAddressActionPerformed(evt);
+            }
+        });
+        jtxtAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtAddressKeyTyped(evt);
             }
         });
         jPanel1.add(jtxtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 160, 30));
@@ -416,6 +442,65 @@ public class Employees extends javax.swing.JFrame {
     private void jcmbPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbPosActionPerformed
         posi = jcmbPos.getSelectedItem().toString();
     }//GEN-LAST:event_jcmbPosActionPerformed
+
+    private void jtxtDoWKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDoWKeyTyped
+        char c = evt.getKeyChar();
+              if (!((c >= '0') && (c <= '9') ||
+                 (c == KeyEvent.VK_PERIOD) ||
+                 (c == KeyEvent.VK_BACK_SPACE) ||
+                 (c == KeyEvent.VK_DELETE))) {
+                   getToolkit().beep();
+                 evt.consume();
+              }
+    }//GEN-LAST:event_jtxtDoWKeyTyped
+
+    private void jtxtFnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtFnameKeyTyped
+        char c = evt.getKeyChar();
+          if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') ||
+             (c == KeyEvent.VK_PERIOD) ||
+             (c == KeyEvent.VK_BACK_SPACE) ||
+             (c == KeyEvent.VK_SPACE) ||
+             (c == KeyEvent.VK_DELETE))) {
+               getToolkit().beep();
+             evt.consume();
+          }
+    }//GEN-LAST:event_jtxtFnameKeyTyped
+
+    private void jtxtMnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtMnameKeyTyped
+        char c = evt.getKeyChar();
+          if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') ||
+             (c == KeyEvent.VK_PERIOD) ||
+             (c == KeyEvent.VK_BACK_SPACE) ||
+             (c == KeyEvent.VK_SPACE) ||
+             (c == KeyEvent.VK_DELETE))) {
+               getToolkit().beep();
+             evt.consume();
+          }
+    }//GEN-LAST:event_jtxtMnameKeyTyped
+
+    private void jtxtLnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtLnameKeyTyped
+       char c = evt.getKeyChar();
+          if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') ||
+             (c == KeyEvent.VK_PERIOD) ||
+             (c == KeyEvent.VK_BACK_SPACE) ||
+             (c == KeyEvent.VK_SPACE) ||
+             (c == KeyEvent.VK_DELETE))) {
+               getToolkit().beep();
+             evt.consume();
+          }
+    }//GEN-LAST:event_jtxtLnameKeyTyped
+
+    private void jtxtAddressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtAddressKeyTyped
+        char c = evt.getKeyChar();
+          if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') ||
+             (c == KeyEvent.VK_PERIOD) ||
+             (c == KeyEvent.VK_BACK_SPACE) ||
+             (c == KeyEvent.VK_SPACE) ||
+             (c == KeyEvent.VK_DELETE))) {
+               getToolkit().beep();
+             evt.consume();
+          }
+    }//GEN-LAST:event_jtxtAddressKeyTyped
 
     public void showPositions(JComboBox positions){
         String tanong = "Select * from positions";

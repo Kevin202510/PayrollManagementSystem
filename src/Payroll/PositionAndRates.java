@@ -458,7 +458,7 @@ public class PositionAndRates extends javax.swing.JFrame {
         String addPosition = "INSERT INTO `positions`(`POS_DESCRIPTION`,`RATE_PRICE`) VALUES (?,?)";
         PreparedStatement st = conn.prepareStatement(addPosition);
             st.setString(1, jtxtPosition.getText());
-            st.setString(2, jtxt_Rates.getText());
+            st.setInt(2, Integer.parseInt(jtxt_Rates.getText()));
             int i = st.executeUpdate();
            if (i > 0) {
                 JOptionPane.showMessageDialog(this,"Successfully Added");
