@@ -5,6 +5,7 @@
  */
 package Payroll;
 
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -44,8 +45,16 @@ public class Employees extends javax.swing.JFrame {
         initComponents();
         showEmployee();
         showPositions(jcmbPos);
-       disableButton();
-//        String kev = jcmbPos.getSelectedItem();
+    
+        jbtnUpdate.setEnabled(false);
+        jbtnDelete.setEnabled(false);
+       jbtnAdd.setEnabled(true);
+    }
+    
+    private void labasmoto(){
+        jbtnUpdate.setEnabled(true);
+        jbtnDelete.setEnabled(true);
+       jbtnAdd.setEnabled(false);
     }
     
    public void createImage(String myString)  {
@@ -112,7 +121,6 @@ public class Employees extends javax.swing.JFrame {
         jtblEmp = new javax.swing.JTable();
         jbtnAdd = new javax.swing.JButton();
         jbtnUpdate = new javax.swing.JButton();
-        jbtnDelete = new javax.swing.JButton();
         jbtn_x = new javax.swing.JButton();
         empcode = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -131,7 +139,8 @@ public class Employees extends javax.swing.JFrame {
         jtxtLname = new javax.swing.JTextField();
         jlblAddress = new javax.swing.JLabel();
         jtxtAddress = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbtnDelete = new javax.swing.JButton();
+        jbtnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -207,16 +216,6 @@ public class Employees extends javax.swing.JFrame {
         });
         jPanel3.add(jbtnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 580, 170, 40));
 
-        jbtnDelete.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbtnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/remove-emp.png"))); // NOI18N
-        jbtnDelete.setText("  DELETE");
-        jbtnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnDeleteActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jbtnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 650, 170, 40));
-
         jbtn_x.setBackground(new java.awt.Color(255, 102, 0));
         jbtn_x.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 11)); // NOI18N
         jbtn_x.setForeground(new java.awt.Color(255, 255, 255));
@@ -255,6 +254,11 @@ public class Employees extends javax.swing.JFrame {
                 jtxtDoWActionPerformed(evt);
             }
         });
+        jtxtDoW.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtDoWKeyTyped(evt);
+            }
+        });
         jPanel1.add(jtxtDoW, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 160, 30));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -279,6 +283,11 @@ public class Employees extends javax.swing.JFrame {
                 jtxtFnameActionPerformed(evt);
             }
         });
+        jtxtFname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtFnameKeyTyped(evt);
+            }
+        });
         jPanel1.add(jtxtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 160, 30));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -288,6 +297,11 @@ public class Employees extends javax.swing.JFrame {
         jtxtMname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtMnameActionPerformed(evt);
+            }
+        });
+        jtxtMname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtMnameKeyTyped(evt);
             }
         });
         jPanel1.add(jtxtMname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 160, 30));
@@ -301,6 +315,11 @@ public class Employees extends javax.swing.JFrame {
                 jtxtLnameActionPerformed(evt);
             }
         });
+        jtxtLname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtLnameKeyTyped(evt);
+            }
+        });
         jPanel1.add(jtxtLname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 160, 30));
 
         jlblAddress.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -312,19 +331,35 @@ public class Employees extends javax.swing.JFrame {
                 jtxtAddressActionPerformed(evt);
             }
         });
-        jPanel1.add(jtxtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 160, 30));
-
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 1200, 250));
-
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dollar-3-32.png"))); // NOI18N
-        jButton1.setText("PAYROLL");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jtxtAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtAddressKeyTyped(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 160, 40));
+        jPanel1.add(jtxtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 160, 30));
+
+        jbtnDelete.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbtnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/remove-emp.png"))); // NOI18N
+        jbtnDelete.setText("  DELETE");
+        jbtnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDeleteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbtnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 120, 170, 40));
+
+        jbtnCancel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbtnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cancel-24.png"))); // NOI18N
+        jbtnCancel.setText("CANCEL");
+        jbtnCancel.setPreferredSize(new java.awt.Dimension(119, 33));
+        jbtnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCancelActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 120, 170, 40));
+
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 1200, 250));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 810));
 
@@ -375,8 +410,7 @@ public class Employees extends javax.swing.JFrame {
     private void jtblEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblEmpMouseClicked
         idselected = Integer.parseInt(jtblEmp.getValueAt(jtblEmp.getSelectedRow(),0).toString());
        getSelectedEmp(idselected);
-       disableAddButton();
-        
+       labasmoto();
     }//GEN-LAST:event_jtblEmpMouseClicked
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
@@ -402,25 +436,6 @@ public class Employees extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jtxtFnameFocusLost
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            sqlConnection getDB = new sqlConnection();
-            Connection conn = getDB.DbconnectP();
-            
-            String getAllEmp = "SELECT * FROM `employees` LEFT JOIN positions ON positions.ID=employees.POSITION_ID where employees.ID>1";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(getAllEmp);
-            
-            while(rs.next()){
-                String fullname = rs.getString("FIRST_NAME") + " " + rs.getString("MIDDLE_NAME") + " " + rs.getString("LAST_NAME");
-                double totalsalary = rs.getInt("RATE_PRICE") * rs.getDouble("DAYS_OF_WORK");
-                JOptionPane.showMessageDialog(this,"fullname : " +fullname + "\n" + "Rate : " + rs.getInt("RATE_PRICE") + "\n" + "Days Of Work : " + rs.getDouble("DAYS_OF_WORK") + "\n" + "SALARY : " + totalsalary);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
         try {
             // TODO add your handling code here:
@@ -435,6 +450,72 @@ public class Employees extends javax.swing.JFrame {
     private void jcmbPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbPosActionPerformed
         posi = jcmbPos.getSelectedItem().toString();
     }//GEN-LAST:event_jcmbPosActionPerformed
+
+    private void jtxtDoWKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDoWKeyTyped
+        char c = evt.getKeyChar();
+              if (!((c >= '0') && (c <= '9') ||
+                 (c == KeyEvent.VK_PERIOD) ||
+                 (c == KeyEvent.VK_BACK_SPACE) ||
+                 (c == KeyEvent.VK_DELETE))) {
+                   getToolkit().beep();
+                 evt.consume();
+              }
+    }//GEN-LAST:event_jtxtDoWKeyTyped
+
+    private void jtxtFnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtFnameKeyTyped
+        char c = evt.getKeyChar();
+          if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') ||
+             (c == KeyEvent.VK_PERIOD) ||
+             (c == KeyEvent.VK_BACK_SPACE) ||
+             (c == KeyEvent.VK_SPACE) ||
+             (c == KeyEvent.VK_DELETE))) {
+               getToolkit().beep();
+             evt.consume();
+          }
+    }//GEN-LAST:event_jtxtFnameKeyTyped
+
+    private void jtxtMnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtMnameKeyTyped
+        char c = evt.getKeyChar();
+          if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') ||
+             (c == KeyEvent.VK_PERIOD) ||
+             (c == KeyEvent.VK_BACK_SPACE) ||
+             (c == KeyEvent.VK_SPACE) ||
+             (c == KeyEvent.VK_DELETE))) {
+               getToolkit().beep();
+             evt.consume();
+          }
+    }//GEN-LAST:event_jtxtMnameKeyTyped
+
+    private void jtxtLnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtLnameKeyTyped
+       char c = evt.getKeyChar();
+          if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') ||
+             (c == KeyEvent.VK_PERIOD) ||
+             (c == KeyEvent.VK_BACK_SPACE) ||
+             (c == KeyEvent.VK_SPACE) ||
+             (c == KeyEvent.VK_DELETE))) {
+               getToolkit().beep();
+             evt.consume();
+          }
+    }//GEN-LAST:event_jtxtLnameKeyTyped
+
+    private void jtxtAddressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtAddressKeyTyped
+        char c = evt.getKeyChar();
+          if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') ||
+             (c == KeyEvent.VK_PERIOD) ||
+             (c == KeyEvent.VK_BACK_SPACE) ||
+             (c == KeyEvent.VK_SPACE) ||
+             (c == KeyEvent.VK_DELETE))) {
+               getToolkit().beep();
+             evt.consume();
+          }
+    }//GEN-LAST:event_jtxtAddressKeyTyped
+
+    private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
+        // TODO add your handling code here:
+        deleteForm();
+        disableButton();
+        
+    }//GEN-LAST:event_jbtnCancelActionPerformed
 
     public void showPositions(JComboBox positions){
         String tanong = "Select * from positions";
@@ -479,11 +560,12 @@ public class Employees extends javax.swing.JFrame {
             st.setString(5, jtxtAddress.getText());
             st.setString(6, strDate);
             st.setInt(7,  getSelectedPositions(posi));
-            st.setInt(8, Integer.parseInt(jtxtDoW.getText()));
+            st.setDouble(8, Double.parseDouble(jtxtDoW.getText()));
             int i = st.executeUpdate();
            if (i > 0) {
                 JOptionPane.showMessageDialog(this,"Successfully Added");
                 deleteForm();
+                disableButton();
                 DefaultTableModel model = (DefaultTableModel)jtblEmp.getModel();
                 model.setRowCount(0);
                  showEmployee();
@@ -512,10 +594,11 @@ public class Employees extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"Successfully Updated");
                   deleteForm();
+                  disableButton();
                    DefaultTableModel model = (DefaultTableModel)jtblEmp.getModel();
                     model.setRowCount(0);
                   showEmployee();
-                  disableButton();
+                  
             } else {
                 JOptionPane.showMessageDialog(this,"Error");
             }
@@ -530,10 +613,11 @@ public class Employees extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"DELETED");
                   deleteForm();
+                   disableButton();
                   DefaultTableModel mod = (DefaultTableModel)jtblEmp.getModel();
                 mod.setRowCount(0);
                  showEmployee();
-                 disableButton();
+                
             } else {
                 JOptionPane.showMessageDialog(this,"Error");
             }
@@ -573,19 +657,21 @@ public class Employees extends javax.swing.JFrame {
          jdtDoB.setDate(null);
          jcmbPos.setSelectedIndex(0);
          empcode.setIcon(null);
-         
+         jtxtDoW.setText("");
      }
      
      public void disableAddButton(){
          jbtnAdd.setEnabled(false);
          jbtnUpdate.setEnabled(true);
          jbtnDelete.setEnabled(true);
+          jbtnCancel.setEnabled(true);
      }
      
      public void disableButton(){
          jbtnAdd.setEnabled(true);
          jbtnUpdate.setEnabled(false);
          jbtnDelete.setEnabled(false);
+         jbtnCancel.setEnabled(false);
      }
      
     /**
@@ -625,7 +711,6 @@ public class Employees extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel empcode;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -638,6 +723,7 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnAdd;
+    private javax.swing.JButton jbtnCancel;
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JButton jbtnUpdate;
     private javax.swing.JButton jbtn_x;
