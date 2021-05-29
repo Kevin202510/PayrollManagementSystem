@@ -68,8 +68,17 @@ public class PaySlip extends javax.swing.JPanel {
         jlbl_positions = new javax.swing.JLabel();
         jlbl_totalSalary = new javax.swing.JLabel();
         jlbl_DOW = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -78,27 +87,61 @@ public class PaySlip extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setText("POSITION");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 102, 100, 29));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 100, 29));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("DAYS OF WORK");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 137, 130, 29));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 130, 29));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("TOTAL SALARY");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 177, 120, 29));
-        add(jlbl_fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 67, 250, 29));
-        add(jlbl_positions, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 102, 240, 29));
-        add(jlbl_totalSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 180, 29));
-        add(jlbl_DOW, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 80, 29));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 120, 29));
+        add(jlbl_fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 250, 29));
+        add(jlbl_positions, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 240, 29));
+        add(jlbl_totalSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 180, 29));
+        add(jlbl_DOW, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 80, 29));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("PAY SLIP");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 180, 30));
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 380, 10));
+
+        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 380, -1));
+
+        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 380, -1));
+
+        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 380, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dollar-2-24.png"))); // NOI18N
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 0, 30, 40));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dollar-2-24.png"))); // NOI18N
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 30, 40));
+
+        jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
+        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 400, 30));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel jlbl_DOW;
     private javax.swing.JLabel jlbl_fullname;
     private javax.swing.JLabel jlbl_positions;

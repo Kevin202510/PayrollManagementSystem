@@ -99,6 +99,11 @@ public class Payrolls extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/printer-4-24.png"))); // NOI18N
         jButton1.setText("PRINT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1102, 755, 128, 48));
 
         jbtn_x.setBackground(new java.awt.Color(255, 102, 0));
@@ -148,6 +153,9 @@ public class Payrolls extends javax.swing.JFrame {
         new Dashboard().setVisible(true);
     }//GEN-LAST:event_jbtn_xActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void jtxtsearchEmpToPayOutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtsearchEmpToPayOutKeyPressed
         if (evt.getKeyCode()==10) {
             new PaySlip(jtxtsearchEmpToPayOut.getText());
