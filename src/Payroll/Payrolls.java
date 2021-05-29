@@ -5,13 +5,24 @@
  */
 package Payroll;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,9 +36,19 @@ public class Payrolls extends javax.swing.JFrame {
      */
     public Payrolls() {
         initComponents();
-        jtxtsearchEmpToPayOut.requestFocusInWindow();
-        jpnl_payslip.setVisible(false);
+        if (getDateNow()==15 || getDateNow()==30) {
+            jtxtsearchEmpToPayOut.requestFocusInWindow();
+        }else{
+            jtxtsearchEmpToPayOut.setEditable(false);
+        }
+        showEmployee();
     }
+    
+    public int getDateNow(){
+        Calendar jlbl_date = Calendar.getInstance(); 
+        int day = jlbl_date.get(Calendar.DAY_OF_MONTH);
+        return day;
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,16 +69,6 @@ public class Payrolls extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jtxtsearchEmpToPayOut = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jpnl_payslip = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jlbl_fullname = new javax.swing.JLabel();
-        jlbl_positions = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jlbl_totalSalary = new javax.swing.JLabel();
-        jlbl_DOW = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,7 +89,7 @@ public class Payrolls extends javax.swing.JFrame {
 
             },
             new String [] {
-                "EMP_BARCODE", "FULLNAME", "DAYS OF WORK", "SALARY"
+                "EMP_BARCODE", "FULLNAME", "DAYS OF WORK"
             }
         ));
         jScrollPane1.setViewportView(jtbl_empPayroll);
@@ -117,27 +128,6 @@ public class Payrolls extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, 340, 40));
 
-        jpnl_payslip.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setText("FULLNAME");
-        jpnl_payslip.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 67, 60, 29));
-
-        jLabel3.setText("POSITION");
-        jpnl_payslip.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 102, 60, 29));
-
-        jLabel5.setText("DAYS OF WORK");
-        jpnl_payslip.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 137, 90, 29));
-
-        jLabel6.setText("TOTAL SALARY");
-        jpnl_payslip.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 177, 80, 29));
-        jpnl_payslip.add(jlbl_fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 67, 260, 29));
-        jpnl_payslip.add(jlbl_positions, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 102, 252, 29));
-        jpnl_payslip.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 112, 260, 29));
-        jpnl_payslip.add(jlbl_totalSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 190, 29));
-        jpnl_payslip.add(jlbl_DOW, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 90, 29));
-
-        jPanel1.add(jpnl_payslip, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 350, 350));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,10 +151,85 @@ public class Payrolls extends javax.swing.JFrame {
     private void jtxtsearchEmpToPayOutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtsearchEmpToPayOutKeyPressed
         if (evt.getKeyCode()==10) {
             new PaySlip(jtxtsearchEmpToPayOut.getText());
-            JOptionPane.showMessageDialog(this,new PaySlip(jtxtsearchEmpToPayOut.getText()),"PaySlip",JOptionPane.PLAIN_MESSAGE);
+            printPaySlip(new PaySlip(jtxtsearchEmpToPayOut.getText()));  
         }
     }//GEN-LAST:event_jtxtsearchEmpToPayOutKeyPressed
 
+    public void printPaySlip(JPanel panel){
+        JOptionPane.showMessageDialog(this,panel,"PaySlip",JOptionPane.PLAIN_MESSAGE);
+        // Create PrinterJob Here
+        PrinterJob printerJob = PrinterJob.getPrinterJob();
+        // Set Printer Job Name
+        printerJob.setJobName("Print Record");
+        // Set Printable
+        printerJob.setPrintable(new Printable() {
+            @Override
+            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+                // Check If No Printable Content
+                if(pageIndex > 0){
+                    return Printable.NO_SUCH_PAGE;
+                }
+                
+                // Make 2D Graphics to map content
+                Graphics2D graphics2D = (Graphics2D)graphics;
+                // Set Graphics Translations
+                // A Little Correction here Multiplication was not working so I replaced with addition
+//                graphics2D.translate(pageFormat.getImageableX()+10, pageFormat.getImageableY()+10);
+                // This is a page scale. Default should be 0.3 I am using 0.5
+                graphics2D.scale(0.5, 0.5);
+                
+                // Now paint panel as graphics2D
+                panel.paint(graphics2D);
+                
+                // return if page exists
+                return Printable.PAGE_EXISTS;
+            }
+        });
+        // Store printerDialog as boolean
+//        boolean returningResult = printerJob.printDialog();
+        // check if dilog is showing
+//        
+        boolean returningResult;
+            
+            do{
+                returningResult = printerJob.printDialog();
+                if (!returningResult) {
+                    JOptionPane.showMessageDialog(null,"You Cannot Cancel Printing PaySlip");
+                }
+            }while(returningResult==false);
+            // Use try catch exeption for failure
+            if(returningResult){
+            try{
+                printerJob.print();
+            }catch (PrinterException printerException){
+                JOptionPane.showMessageDialog(null, "Print Error: " + printerException.getMessage());
+            }
+        }
+}
+    
+    public void showEmployee(){
+        try {
+            sqlConnection getDB = new sqlConnection();
+            Connection conn = getDB.DbconnectP();
+            
+            DefaultTableModel model = (DefaultTableModel)jtbl_empPayroll.getModel();
+            Object[] empTable = new Object[9];
+            String getAllEmp = "SELECT * FROM `employees` LEFT JOIN positions ON positions.ID=employees.POSITION_ID where employees.ID>1 AND DAYS_OF_WORK>0";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(getAllEmp);
+            
+            while(rs.next()){
+                String fullname = rs.getString("FIRST_NAME") + " " + rs.getString("MIDDLE_NAME") + " " + rs.getString("LAST_NAME");
+                empTable[0] = rs.getString("EMP_BARCODE");
+                empTable[1] = fullname;
+                empTable[2] = rs.getDouble("DAYS_OF_WORK");
+                model.addRow(empTable);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -204,22 +269,12 @@ public class Payrolls extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbtn_x;
-    private javax.swing.JLabel jlbl_DOW;
-    private javax.swing.JLabel jlbl_fullname;
-    private javax.swing.JLabel jlbl_positions;
-    private javax.swing.JLabel jlbl_totalSalary;
-    private javax.swing.JPanel jpnl_payslip;
     private javax.swing.JTable jtbl_empPayroll;
     private javax.swing.JTextField jtxtsearchEmpToPayOut;
     // End of variables declaration//GEN-END:variables
