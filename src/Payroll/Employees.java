@@ -10,13 +10,14 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,16 +47,14 @@ public class Employees extends javax.swing.JFrame {
         showEmployee();
         showPositions(jcmbPos);
     
-        jbtnUpdate.setEnabled(false);
-        jbtnDelete.setEnabled(false);
-       jbtnAdd.setEnabled(true);
+        disableButton();
     }
     
-    private void labasmoto(){
-        jbtnUpdate.setEnabled(true);
-        jbtnDelete.setEnabled(true);
-       jbtnAdd.setEnabled(false);
-    }
+//    private void labasmoto(){
+//        jbtnUpdate.setEnabled(true);
+//        jbtnDelete.setEnabled(true);
+//       jbtnAdd.setEnabled(false);
+//    }
     
    public void createImage(String myString)  {
 		try {
@@ -128,7 +127,6 @@ public class Employees extends javax.swing.JFrame {
         jdtDoB = new com.toedter.calendar.JDateChooser();
         jcmbPos = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jtxtDoW = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -141,6 +139,15 @@ public class Employees extends javax.swing.JFrame {
         jtxtAddress = new javax.swing.JTextField();
         jbtnDelete = new javax.swing.JButton();
         jbtnCancel = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -182,19 +189,19 @@ public class Employees extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtblEmp);
         if (jtblEmp.getColumnModel().getColumnCount() > 0) {
-            jtblEmp.getColumnModel().getColumn(0).setPreferredWidth(10);
-            jtblEmp.getColumnModel().getColumn(1).setPreferredWidth(100);
-            jtblEmp.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jtblEmp.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jtblEmp.getColumnModel().getColumn(0).setPreferredWidth(5);
+            jtblEmp.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jtblEmp.getColumnModel().getColumn(2).setPreferredWidth(150);
+            jtblEmp.getColumnModel().getColumn(3).setPreferredWidth(150);
             jtblEmp.getColumnModel().getColumn(4).setResizable(false);
             jtblEmp.getColumnModel().getColumn(4).setPreferredWidth(30);
-            jtblEmp.getColumnModel().getColumn(5).setPreferredWidth(10);
+            jtblEmp.getColumnModel().getColumn(5).setPreferredWidth(50);
             jtblEmp.getColumnModel().getColumn(6).setResizable(false);
             jtblEmp.getColumnModel().getColumn(6).setPreferredWidth(30);
-            jtblEmp.getColumnModel().getColumn(7).setPreferredWidth(100);
+            jtblEmp.getColumnModel().getColumn(7).setPreferredWidth(50);
         }
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 1220, 420));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1240, 420));
 
         jbtnAdd.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add-emp.png"))); // NOI18N
@@ -249,25 +256,13 @@ public class Employees extends javax.swing.JFrame {
         jLabel5.setText("POSITION");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 80, 10));
 
-        jtxtDoW.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtDoWActionPerformed(evt);
-            }
-        });
-        jtxtDoW.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtDoWKeyTyped(evt);
-            }
-        });
-        jPanel1.add(jtxtDoW, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 160, 30));
-
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setText("DAYS OF WORK");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
+        jLabel6.setText("TIME OUT");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 70, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("BARCODE");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("FIRST NAME");
@@ -359,6 +354,38 @@ public class Employees extends javax.swing.JFrame {
         });
         jPanel1.add(jbtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 120, 170, 40));
 
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel10.setText("TIME IN");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 70, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "30" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 40, -1));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "30" }));
+        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, -1, -1));
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("AM");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 100, 20, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText(":");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 10, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("PM");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 140, 20, -1));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText(":");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, 10, -1));
+
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 1200, 250));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 810));
@@ -376,7 +403,26 @@ public class Employees extends javax.swing.JFrame {
         return code;
     }
     private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
-       codes = generateCode(jtxtFname.getText());
+        
+        Date petsa = new Date();
+       int age = 0;
+       if((jdtDoB.getDate() != null)){
+           age = petsa.getYear() - jdtDoB.getDate().getYear();
+           if(petsa.getMonth() > jdtDoB.getDate().getMonth()){
+               age -=1;
+           }
+       }
+        
+        if( empcode.getIcon() != null || jtxtFname.getText().isBlank() || jtxtMname.getText().isBlank() || jtxtLname.getText().isBlank() || jtxtAddress.getText().isBlank() || jdtDoB.getDate() == null){
+           JOptionPane.showMessageDialog(this, "PLEASE FILL UP ALL INFORMATION");
+       }
+       
+       else if(age<18){
+            JOptionPane.showMessageDialog(this, "MINOR AGED");
+        
+        }
+       else{
+        codes = generateCode(jtxtFname.getText());
        createImage(codes);
        String filePath = "src\\Barcodes\\"+ codes + ".png";
        ImageIcon vin = new ImageIcon(filePath);
@@ -387,6 +433,7 @@ public class Employees extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
     }//GEN-LAST:event_jbtnAddActionPerformed
 
     private void jtxtMnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtMnameActionPerformed
@@ -397,10 +444,6 @@ public class Employees extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtAddressActionPerformed
 
-    private void jtxtDoWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDoWActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtDoWActionPerformed
-
     private void jtxtFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtFnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtFnameActionPerformed
@@ -410,7 +453,7 @@ public class Employees extends javax.swing.JFrame {
     private void jtblEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblEmpMouseClicked
         idselected = Integer.parseInt(jtblEmp.getValueAt(jtblEmp.getSelectedRow(),0).toString());
        getSelectedEmp(idselected);
-       labasmoto();
+       disableAddButton();
     }//GEN-LAST:event_jtblEmpMouseClicked
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
@@ -437,12 +480,30 @@ public class Employees extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtFnameFocusLost
 
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
-        try {
-            // TODO add your handling code here:
+       Date petsa = new Date();
+       int age = 0;
+       if((jdtDoB.getDate() != null)){
+           age = petsa.getYear() - jdtDoB.getDate().getYear();
+           if(petsa.getMonth() > jdtDoB.getDate().getMonth()){
+               age -=1;
+           }
+       }
+        
+        if(jtxtFname.getText().isBlank() || jtxtMname.getText().isBlank() || jtxtLname.getText().isBlank() || jtxtAddress.getText().isBlank() || jdtDoB.getDate() == null){
+           JOptionPane.showMessageDialog(this, "PLEASE FILL UP ALL INFORMATION");
+       }
+       
+       else if(age<18){
+            JOptionPane.showMessageDialog(this, "MINOR AGED");
+        
+        } 
+       else{
+           try {
             updateEmployee(idselected);
         } catch (SQLException ex) {
             Logger.getLogger(Employees.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
     }//GEN-LAST:event_jbtnUpdateActionPerformed
 
     String posi;
@@ -450,17 +511,6 @@ public class Employees extends javax.swing.JFrame {
     private void jcmbPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbPosActionPerformed
         posi = jcmbPos.getSelectedItem().toString();
     }//GEN-LAST:event_jcmbPosActionPerformed
-
-    private void jtxtDoWKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDoWKeyTyped
-        char c = evt.getKeyChar();
-              if (!((c >= '0') && (c <= '9') ||
-                 (c == KeyEvent.VK_PERIOD) ||
-                 (c == KeyEvent.VK_BACK_SPACE) ||
-                 (c == KeyEvent.VK_DELETE))) {
-                   getToolkit().beep();
-                 evt.consume();
-              }
-    }//GEN-LAST:event_jtxtDoWKeyTyped
 
     private void jtxtFnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtFnameKeyTyped
         char c = evt.getKeyChar();
@@ -548,6 +598,7 @@ public class Employees extends javax.swing.JFrame {
     }
     
     public void addNewEmployee() throws SQLException{
+       
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
         String strDate = dateFormat.format(jdtDoB.getDate());
         
@@ -560,7 +611,7 @@ public class Employees extends javax.swing.JFrame {
             st.setString(5, jtxtAddress.getText());
             st.setString(6, strDate);
             st.setInt(7,  getSelectedPositions(posi));
-            st.setDouble(8, Double.parseDouble(jtxtDoW.getText()));
+//            st.setDouble(8, Double.parseDouble(jtxtDoW.getText()));
             int i = st.executeUpdate();
            if (i > 0) {
                 JOptionPane.showMessageDialog(this,"Successfully Added");
@@ -573,6 +624,7 @@ public class Employees extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Error");
             }
     }
+    
     
      public void updateEmployee(int ids) throws SQLException{
         String UpdateEmployee = "UPDATE `employees` SET `FIRST_NAME`=?, `MIDDLE_NAME`=?, `LAST_NAME`=?, `ADDRESS`=? ,`DOB`=?, `POSITION_ID`=? WHERE ID = ?";
@@ -613,7 +665,7 @@ public class Employees extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"DELETED");
                   deleteForm();
-                   disableButton();
+                  disableButton();
                   DefaultTableModel mod = (DefaultTableModel)jtblEmp.getModel();
                 mod.setRowCount(0);
                  showEmployee();
@@ -641,7 +693,7 @@ public class Employees extends javax.swing.JFrame {
                 jtxtAddress.setText(rs.getString("ADDRESS"));
                 jdtDoB.setDate(rs.getDate("DOB"));
                 jcmbPos.setSelectedItem(rs.getString("POS_DESCRIPTION"));
-                jtxtDoW.setText(String.valueOf(rs.getDouble("DAYS_OF_WORK")));
+//                jtxtDoW.setText(String.valueOf(rs.getDouble("DAYS_OF_WORK")));
                 
             }
         } catch (SQLException ex) {
@@ -657,7 +709,7 @@ public class Employees extends javax.swing.JFrame {
          jdtDoB.setDate(null);
          jcmbPos.setSelectedIndex(0);
          empcode.setIcon(null);
-         jtxtDoW.setText("");
+//         jtxtDoW.setText("");
      }
      
      public void disableAddButton(){
@@ -711,8 +763,17 @@ public class Employees extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel empcode;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -732,7 +793,6 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JLabel jlblAddress;
     private javax.swing.JTable jtblEmp;
     private javax.swing.JTextField jtxtAddress;
-    private javax.swing.JTextField jtxtDoW;
     private javax.swing.JTextField jtxtFname;
     private javax.swing.JTextField jtxtLname;
     private javax.swing.JTextField jtxtMname;

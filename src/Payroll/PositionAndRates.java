@@ -593,6 +593,22 @@ public class PositionAndRates extends javax.swing.JFrame {
     }
     
     public void addNewPosition() throws SQLException{
+      int rows = jtblPos_Rate.getRowCount();
+      int checker = 0;
+      for (int rowNum=0; rowNum<rows; ++rowNum){
+          String pos = String.valueOf(jtblPos_Rate.getValueAt(rowNum,1));
+          if(jtxtPosition.getText().equalsIgnoreCase(pos)){
+              checker = 1;
+              break;
+          }
+      }
+      if(checker==1){
+          JOptionPane.showMessageDialog(this, "Position already assigned");
+      }
+      else if(jtxtPosition.getText().isBlank() || jtxt_Rates.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Empty");
+      }
+      else{        
         String addPosition = "INSERT INTO `positions`(`POS_DESCRIPTION`,`RATE_PRICE`) VALUES (?,?)";
         PreparedStatement st = conn.prepareStatement(addPosition);
             st.setString(1, jtxtPosition.getText());
@@ -601,6 +617,7 @@ public class PositionAndRates extends javax.swing.JFrame {
            if (i > 0) {
                 JOptionPane.showMessageDialog(this,"Successfully Added");
                 tanggalinAngLamanNgPosition();
+                
                 DefaultTableModel mod = (DefaultTableModel)jtblPos_Rate.getModel();
                 mod.setRowCount(0);
                 showPositionAndRates();
@@ -609,8 +626,26 @@ public class PositionAndRates extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Error");
             }
     }
+    }
 
     public void addNewDeduction() throws SQLException{
+         int Row = jtbl_deductions.getRowCount();
+         int checker = 0;
+         for (int rowNum=0; rowNum<Row; ++rowNum){
+            String pos = String.valueOf(jtbl_deductions.getValueAt(rowNum,1));
+            if(jtxtDeductdesc.getText().equalsIgnoreCase(pos)){
+                  checker = 1;
+                  break;
+             }
+            }
+      if(checker==1){
+          JOptionPane.showMessageDialog(this, "DEDUCTION NAME");
+      }
+      
+      else if(jtxtDeductdesc.getText().isBlank() || jtxtDeductionRates.getText().isBlank()){
+          JOptionPane.showMessageDialog(this,"heyyy");
+      }
+      else{
         String addPosition = "INSERT INTO `deductions`(`DEDUCTION_DESCRIPTION`,`DEDUCTION_RATE`) VALUES (?,?)";
         PreparedStatement st = conn.prepareStatement(addPosition);
             st.setString(1, jtxtDeductdesc.getText());
@@ -627,8 +662,25 @@ public class PositionAndRates extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Error");
             }
     }
+    }
     
     public void updateDeductions(int ids) throws SQLException{
+        int Row = jtbl_deductions.getRowCount();
+         int checker = 0;
+         for (int rowNum=0; rowNum<Row; ++rowNum){
+            String pos = String.valueOf(jtbl_deductions.getValueAt(rowNum,1));
+            if(jtxtDeductdesc.getText().equalsIgnoreCase(pos)){
+                  checker = 1;
+                  break;
+             }
+            }
+      if(checker==1){
+          JOptionPane.showMessageDialog(this, "DEDUCTION NAME");
+      }
+       else if(jtxtDeductdesc.getText().isBlank() || jtxtDeductionRates.getText().isBlank()){
+          JOptionPane.showMessageDialog(this,"heyyy");
+      }
+      else{
         String updateEmployee = "UPDATE `deductions` SET `DEDUCTION_DESCRIPTION`=?, `DEDUCTION_RATE`=? WHERE ID = ?";
         PreparedStatement st = conn.prepareStatement(updateEmployee);
         st.setString(1, jtxtDeductdesc.getText());
@@ -639,12 +691,14 @@ public class PositionAndRates extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"Successfully Update");
                   tanggalinAngLamanNgDeduction();
+                  disableDed_Button();
                   DefaultTableModel mod = (DefaultTableModel)jtbl_deductions.getModel();
                     mod.setRowCount(0);
-                 showPositionAndRates();
+                    showDeductions();
             } else {
                 JOptionPane.showMessageDialog(this,"Error");
             }
+    }
     }
     
      public void deletePositions(int id) throws SQLException{
@@ -656,6 +710,7 @@ public class PositionAndRates extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"Successfully Deleted");
                   tanggalinAngLamanNgPosition();
+                  disablePos_Button();
                   DefaultTableModel mod = (DefaultTableModel)jtblPos_Rate.getModel();
                     mod.setRowCount(0);
                  showPositionAndRates();
@@ -666,6 +721,24 @@ public class PositionAndRates extends javax.swing.JFrame {
      }
      
       public void updatePositions(int ids) throws SQLException{
+          
+           int rows = jtblPos_Rate.getRowCount();
+      int checker = 0;
+      for (int rowNum=0; rowNum<rows; ++rowNum){
+          String pos = String.valueOf(jtblPos_Rate.getValueAt(rowNum,1));
+          if(jtxtPosition.getText().equalsIgnoreCase(pos)){
+              checker = 1;
+              break;
+          }
+      }
+      if(checker==1){
+          JOptionPane.showMessageDialog(this,"Position already assigned");
+      }
+      else if(jtxtPosition.getText().isBlank() || jtxt_Rates.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Empty");
+      }
+      
+      else{
         String updateEmployee = "UPDATE `positions` SET `POS_DESCRIPTION`=?, `RATE_PRICE`=? WHERE ID = ?";
         PreparedStatement st = conn.prepareStatement(updateEmployee);
         st.setString(1, jtxtPosition.getText());
@@ -676,6 +749,7 @@ public class PositionAndRates extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"Successfully Update");
                   tanggalinAngLamanNgPosition();
+                  disablePos_Button();
                   DefaultTableModel mod = (DefaultTableModel)jtblPos_Rate.getModel();
                     mod.setRowCount(0);
                  showPositionAndRates();
@@ -683,6 +757,7 @@ public class PositionAndRates extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Error");
             }
     }
+      }
      
      public void deleteDeductions(int id) throws SQLException{
         String deleteEmployee = "DELETE FROM deductions WHERE ID = ?";
@@ -693,6 +768,7 @@ public class PositionAndRates extends javax.swing.JFrame {
             if (i > 0) {
                   JOptionPane.showMessageDialog(this,"Successfully Deleted");
                   tanggalinAngLamanNgDeduction();
+                  disableDed_Button();
                   DefaultTableModel mod = (DefaultTableModel)jtbl_deductions.getModel();
                     mod.setRowCount(0);
                  showDeductions();

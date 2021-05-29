@@ -116,7 +116,6 @@ public class Payrolls extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbl_empPayroll = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jbtn_x = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jtxtsearchEmpToPayOut = new javax.swing.JTextField();
@@ -125,6 +124,7 @@ public class Payrolls extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(248, 210, 160));
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 38)); // NOI18N
@@ -143,15 +143,18 @@ public class Payrolls extends javax.swing.JFrame {
             new String [] {
                 "EMP_BARCODE", "FULLNAME", "DAYS OF WORK"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jtbl_empPayroll);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 153, 1215, 596));
-
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/printer-4-24.png"))); // NOI18N
-        jButton1.setText("PRINT");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1102, 755, 128, 48));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 153, 1190, 596));
 
         jbtn_x.setBackground(new java.awt.Color(255, 102, 0));
         jbtn_x.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 11)); // NOI18N
@@ -162,7 +165,7 @@ public class Payrolls extends javax.swing.JFrame {
                 jbtn_xActionPerformed(evt);
             }
         });
-        jPanel1.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1219, 0, -1, -1));
+        jPanel1.add(jbtn_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 0, 40, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
@@ -268,7 +271,6 @@ public class Payrolls extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

@@ -12,6 +12,5 @@ package Payroll;
 public class InitRunThis {
     public static void main(String[] args) {
         new MainEmployeeDashboard().setVisible(true);
-        new LogIn().setVisible(true);
     }
 }

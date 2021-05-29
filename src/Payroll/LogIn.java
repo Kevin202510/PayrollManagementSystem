@@ -73,7 +73,7 @@ public class LogIn extends javax.swing.JFrame {
                 jtxt_unameActionPerformed(evt);
             }
         });
-        jPanel1.add(jtxt_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 100, 210, 20));
+        jPanel1.add(jtxt_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 200, 20));
 
         j_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         j_password.setBorder(null);
